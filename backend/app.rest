@@ -1,0 +1,71 @@
+POST http://localhost:5200/users/register
+Content-Type: application/json
+
+{
+    "fullName": "Meshack Kiplimo",
+    "email": "meshack2@gmail.com",
+    "password": "12345678"
+}
+
+
+### login 
+POST http://localhost:5200/users/login
+Content-Type: application/json
+
+{
+   "email": "meshack2@gmail.com",
+   "password": "12345678" 
+}
+
+### fetching users
+GET http://localhost:5200/users/
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYzgyMmQ4M2MtMDE5YS00YzkwLTkwNDAtODM3NmIwYTQzY2YzIiwiZnVsbE5hbWUiOiJNZXNoYWNrIEtpcGxpbW8iLCJlbWFpbCI6Im1lc2hhY2syQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDA1JDM1eXpVdDczZDdidGhKQWRXeUtEOE95NnN5TkRuNVFNM3guc0kxcEtFN3ZhRDR0bXpKYVhpIiwicm9sZSI6InVzZXIiLCJpc0Fzc2lnbmVkIjowLCJpYXQiOjE2OTk2MjAxMDMsImV4cCI6MTY5OTc5MjkwM30.qczLgRkY2g22Bemk9ui5YdNlk0907au_GYbQCF2uPvo
+
+
+### fetching user
+GET http://localhost:5200/users/single/187fb1ce-7cee-4911-ba42-31e0ff7ddde2/
+token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYzgyMmQ4M2MtMDE5YS00YzkwLTkwNDAtODM3NmIwYTQzY2YzIiwiZnVsbE5hbWUiOiJNZXNoYWNrIEtpcGxpbW8iLCJlbWFpbCI6Im1lc2hhY2syQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDA1JDM1eXpVdDczZDdidGhKQWRXeUtEOE95NnN5TkRuNVFNM3guc0kxcEtFN3ZhRDR0bXpKYVhpIiwicm9sZSI6InVzZXIiLCJpc0Fzc2lnbmVkIjowLCJpYXQiOjE2OTk2MjAxMDMsImV4cCI6MTY5OTc5MjkwM30.qczLgRkY2g22Bemk9ui5YdNlk0907au_GYbQCF2uPvo
+
+
+
+### checking user details
+GET http://localhost:5200/users/checkUserDetails
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYzgyMmQ4M2MtMDE5YS00YzkwLTkwNDAtODM3NmIwYTQzY2YzIiwiZnVsbE5hbWUiOiJNZXNoYWNrIEtpcGxpbW8iLCJlbWFpbCI6Im1lc2hhY2syQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDA1JDM1eXpVdDczZDdidGhKQWRXeUtEOE95NnN5TkRuNVFNM3guc0kxcEtFN3ZhRDR0bXpKYVhpIiwicm9sZSI6InVzZXIiLCJpc0Fzc2lnbmVkIjowLCJpYXQiOjE2OTk2MjAxMDMsImV4cCI6MTY5OTc5MjkwM30.qczLgRkY2g22Bemk9ui5YdNlk0907au_GYbQCF2uPvo
+
+
+###### creating new projects
+POST http://localhost:5200/project/
+Content-Type: application/json
+
+{
+    "project_name": "React project",
+    "description": "to be ready by this weekend",
+    "endDate": "12/13/2023"
+}
+
+### fetching all projects
+GET http://localhost:5200/project/
+
+
+### fetching all projects
+GET http://localhost:5200/project/763e48ed-5dbc-4401-b05d-3527828a1c61/
+
+# Deleting a project
+###
+DELETE http://localhost:5200/project/b5c6906b-3e90-44b8-b2dc-73dee6f3085a/
+
+
+### assigning a project to user
+POST http://localhost:5200/project/assign/user/
+Content-Type: application/json
+
+{
+"user_id":"fd171c31-84e8-4638-908f-85e5bd6ffc8b",
+"project_id":"763e48ed-5dbc-4401-b05d-3527828a1c61"
+}
+
+### marking it has complete
+POST http://localhost:5200/project/complete/2c788edf-34b3-47a6-85ef-951478a98eb3/
+Content-Type: application/json
+
+{}
