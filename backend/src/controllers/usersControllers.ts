@@ -4,7 +4,7 @@ import { v4 } from 'uuid'
 import bcrypt from 'bcrypt'
 import { regUserValidation } from '../validators/validators';
 import { comparedPass } from '../utils/comparedPass';
-import { verifyToken } from '../middlewares/verifyToken';
+import { ExtendedUser, verifyToken } from '../middlewares/verifyToken';
 import { tokenGenerator } from '../utils/generateToken';
 
 
@@ -79,6 +79,51 @@ export const loginUserController=async (req:Request,res:Response)=>{
     }else{
         return res.status(404).json({
             error:"Account does not exist"
+        })
+    }
+}
+
+export const checkCredentials=(req:ExtendedUser,res:Response)=>{
+    if(req.info){
+        return res.json({
+            info: req.info
+        })
+    }
+}
+
+
+export const getUserDetails=async(req:Request,res:Response)=>{
+
+    try {
+
+       const userID =req.params.userID
+       console.log(userID);       
+    
+        const result = await dbhelpers.execute('GetUserDetails',{userID});
+        const userDetails = result.recordset[0];
+
+        console.log(userDetails);
+        
+        if (!userDetails) {
+          return res.status(404).json({ message: 'User not found' });
+        }
+    
+        res.json(userDetails);
+
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+      }
+}
+
+export const getAllUsersControllers=async(req:Request, res:Response)=>{
+    try{
+        const users=(await dbhelpers.execute('fetchAllUsers')).recordset
+
+        return res.status(201).json(users)
+    }catch(error){
+        return res.json({
+            error:error
         })
     }
 }

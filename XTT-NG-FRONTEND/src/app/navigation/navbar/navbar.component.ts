@@ -8,24 +8,15 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
 
-  visible=true
-  constructor(private router:Router){
+  visible = true;
+  loggedInTrue = localStorage.getItem('loggedIn');
+  loggedIn = this.loggedInTrue === 'true';
 
-  }
-  loggedInTrue=localStorage.getItem('loggedIn')
-  loggedIn=this.loggedInTrue
+  constructor(private router: Router) {}
 
-
-  checkLoggedIn(){
-    if(this.loggedInTrue=='true'){
-
-    }
-  }
-
-  logout(){
-    this.router.navigate([''])
-    localStorage.clear()
+  logout() {
+    this.router.navigate(['']);
+    localStorage.clear();
     console.log(localStorage.getItem('token'));
-    
   }
 }
