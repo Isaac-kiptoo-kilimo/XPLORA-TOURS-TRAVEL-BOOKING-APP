@@ -1,14 +1,20 @@
-import express, { json,Response,Request,NextFunction } from 'express';
-import * as dotenv from 'dotenv';
-import cors from 'cors';
+import express, { json ,Request,Response,NextFunction} from "express";
+import dotenv from 'dotenv'
 
-dotenv.config();
+import cors from "cors"
+import userRouter from "./routes/userRoutes";
 
+
+dotenv.config()
 
 const app=express();
 
 app.use(json());
-app.use(cors)
+
+app.use(cors())
+
+app.use('/users',userRouter)
+// app.use('/project',projectRouter)
 
 
 app.use((error:Error,req:Request,res:Response,next:NextFunction)=>{
@@ -18,11 +24,8 @@ app.use((error:Error,req:Request,res:Response,next:NextFunction)=>{
 
 })
 
-const port=process.env.PORT || 4300;
-
+const port=process.env.PORT || 4000;
 app.listen(port,()=>{
-    console.log(`App is running at ${port}`);
+    console.log(`This App is running on port:${port}`);
     
-});
-
-
+})

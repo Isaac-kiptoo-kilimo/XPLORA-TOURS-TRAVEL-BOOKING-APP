@@ -1,20 +1,21 @@
-POST http://localhost:5200/users/register
+###
+POST http://localhost:4500/users/register/
 Content-Type: application/json
 
 {
-    "fullName": "Meshack Kiplimo",
-    "email": "meshack2@gmail.com",
-    "password": "12345678"
+    "fullName": "Emmanuel Kipsang",
+    "email": "emanuelKip@gmail.com",
+    "password": "12345678@Ek"
 }
 
 
 ### login 
-POST http://localhost:5200/users/login
+POST http://localhost:4500/users/login/
 Content-Type: application/json
 
 {
-   "email": "meshack2@gmail.com",
-   "password": "12345678" 
+   "email": "emanuelKip@gmail.com",
+   "password": "12345678@Ek" 
 }
 
 ### fetching users

@@ -2,7 +2,8 @@ export interface User{
     userID:string,
     fullName:string,
     email:string,
-    password:string
+    password:string,
+    role:string
 }
 
 export interface Tour{
