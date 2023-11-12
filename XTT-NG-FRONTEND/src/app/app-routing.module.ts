@@ -6,14 +6,17 @@ import { ToursComponent } from './shared-components/tours/tours.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
+  {path: "", pathMatch: 'full', redirectTo: ""},
   {path:'', component:HomeComponent},
-  {path:'/register', component:RegisterComponent},
-  {path:'/login', component:LoginComponent},
-  {path:'/admin', component:AdminComponent},
-  {path:'/user', component:UserComponent},
-  {path:'/tour', component:ToursComponent},
+  {path:'register', component:RegisterComponent},
+  {path:'login', component:LoginComponent},
+  {path:'admin', component:AdminComponent},
+  {path:'user', component:UserComponent},
+  {path:'tour', component:ToursComponent},
+  {path: "**", component:NotFoundComponent}
 ];
 
 @NgModule({

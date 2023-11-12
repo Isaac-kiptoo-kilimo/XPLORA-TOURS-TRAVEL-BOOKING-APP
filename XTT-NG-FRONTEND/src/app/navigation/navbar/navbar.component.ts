@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,4 +9,23 @@ import { Component } from '@angular/core';
 export class NavbarComponent {
 
   visible=true
+  constructor(private router:Router){
+
+  }
+  loggedInTrue=localStorage.getItem('loggedIn')
+  loggedIn=this.loggedInTrue
+
+
+  checkLoggedIn(){
+    if(this.loggedInTrue=='true'){
+
+    }
+  }
+
+  logout(){
+    this.router.navigate([''])
+    localStorage.clear()
+    console.log(localStorage.getItem('token'));
+    
+  }
 }
