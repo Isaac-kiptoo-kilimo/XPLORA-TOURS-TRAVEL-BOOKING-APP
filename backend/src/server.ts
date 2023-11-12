@@ -14,7 +14,6 @@ app.use(json());
 app.use(cors())
 
 app.use('/users',userRouter)
-// app.use('/project',projectRouter)
 
 
 app.use((error:Error,req:Request,res:Response,next:NextFunction)=>{
