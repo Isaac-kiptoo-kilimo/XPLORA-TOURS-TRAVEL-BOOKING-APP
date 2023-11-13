@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,14 +10,15 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
 
   visible = true;
-  loggedInTrue = localStorage.getItem('loggedIn');
-  loggedIn = this.loggedInTrue === 'true';
+  loggedIn: boolean = false;
 
-  constructor(private router: Router) {}
+ constructor(private router: Router, private authService: AuthService) {
+    this.loggedIn = authService.isLoggedIn();
+  }
 
   logout() {
     this.router.navigate(['']);
     localStorage.clear();
-    console.log(localStorage.getItem('token'));
+    this.loggedIn = false;
   }
 }

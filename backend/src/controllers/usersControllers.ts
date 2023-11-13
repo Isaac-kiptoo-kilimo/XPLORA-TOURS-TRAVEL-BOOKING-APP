@@ -71,9 +71,12 @@ export const loginUserController=async (req:Request,res:Response)=>{
             user.role
         )
 
+        console.log(token);
+
         return res.json({
             message:"logged in successfully",
-            token
+            token      
+            
         })
 
     }else{

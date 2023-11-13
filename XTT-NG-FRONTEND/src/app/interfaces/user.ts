@@ -8,6 +8,7 @@ export interface User {
 
 
 export interface LoginResponse {
+    user: User | undefined;
     // userID(userID: any): unknown;
     token: string;
     userID:string

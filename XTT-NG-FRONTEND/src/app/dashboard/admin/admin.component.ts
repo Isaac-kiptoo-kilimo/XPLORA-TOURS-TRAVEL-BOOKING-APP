@@ -8,4 +8,6 @@ import { Component } from '@angular/core';
 export class AdminComponent {
   visible = true
   notVisible=false
+  loggedIn=true
+  
 }

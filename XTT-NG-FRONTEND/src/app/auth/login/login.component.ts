@@ -12,7 +12,9 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
   logInUserForm: FormGroup;
+
   errorMessage: string = '';
   successMessage: string = '';
   loggingIn: boolean = false;
@@ -30,6 +32,12 @@ export class LoginComponent {
       password: ['', [Validators.required]]
     });
   }
+
+// loginUser(){
+
+// }
+
+
 
   loginUser() {
     if (this.logInUserForm.invalid) {
