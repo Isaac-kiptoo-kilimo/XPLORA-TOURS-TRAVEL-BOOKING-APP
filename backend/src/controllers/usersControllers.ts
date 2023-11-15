@@ -6,6 +6,7 @@ import { regUserValidation } from '../validators/validators';
 import { comparedPass } from '../utils/comparedPass';
 import { ExtendedUser, verifyToken } from '../middlewares/verifyToken';
 import { tokenGenerator } from '../utils/generateToken';
+import { User, updateUser } from '../types/interfaces';
 
 
 const dbhelpers=new Connection;
@@ -62,6 +63,8 @@ export const loginUserController=async (req:Request,res:Response)=>{
     const user=existingUserWithEmail[0]
 
     if(user){
+        console.log(user);
+        
 
         const validPass=await comparedPass(password,user.password)
         const token=tokenGenerator(
@@ -130,3 +133,59 @@ export const getAllUsersControllers=async(req:Request, res:Response)=>{
         })
     }
 }
+
+
+// export const updateUserController = async (req: Request, res: Response) => {
+//   try {
+//     const { userID, fullName, email ,password} = req.body;
+//     let hashedPwd=await bcrypt.hash(password , 5)
+
+//     const { error } = validateUpdateuser.validate(req.body);
+//     if (error)
+//       return res
+//         .status(400)
+//         .send({ success: false, message: error.details[0].message });
+
+//     const newUser: updateUser = {
+//       userID,
+//       fullName,
+//       email,
+//       password:hashedPwd,
+//     };
+
+//     const procedureName = "updateUser";
+//     const params = newUser;
+//     // console.log(params);
+
+//     await dbhelpers.execute(procedureName, {params});
+//     return res.send({ message: "User updated successfully" });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send({
+//       error: (error as Error).message,
+//       message: "Internal Sever Error",
+//     });
+//   }
+// };
+
+// export const getUser = async (req: Request, res: Response) => {
+//     try {
+//       const userID = req.params.userID;
+//       // console.log(id);
+//       if (!id) return res.status(400).send({ message: "Id is required" });
+  
+//       const { error } = validateuserId.validate(req.params);
+  
+//       if (error)
+//         return res
+//           .status(400)
+//           .send({ success: false, message: error.details[0].message });
+  
+//       const procedureName = "getUserById";
+//       const result = await dbhelpers.execute(procedureName, { userID });
+  
+//       res.json(result.recordset);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };

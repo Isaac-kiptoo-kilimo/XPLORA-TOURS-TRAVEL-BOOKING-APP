@@ -1,4 +1,4 @@
-<nav class="bg-blue-900">
+<nav class="bg-blue-900 py-3">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -24,23 +24,23 @@
             <div class="flex space-x-4">
             
               <div *ngIf="!loggedIn">
-                <a routerLink="" class="bg-blue-700 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
+                <a routerLink="" class="bg-blue-700 text-white rounded-md px-3 py-2 text-2xl font-medium" aria-current="page">Home</a>
               </div>
              <div *ngIf="!loggedIn">
-                <a routerLink="/tours" class="text-gray-300 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Tours</a>
+                <a routerLink="/tours" class="text-white hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-2xl font-medium">Tours</a>
              </div>
               <div  *ngIf="!loggedIn" >
-                <a routerLink="/register" class="text-gray-300 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Register</a>
+                <a routerLink="/register" class="text-white hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-2xl font-medium">Register</a>
               </div>
               <div *ngIf="!loggedIn">
-                <a routerLink="/login" class="text-gray-300 hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Login</a>
+                <a routerLink="/login" class="text-white hover:bg-blue-700 hover:text-white rounded-md px-3 py-2 text-2xl font-medium">Login</a>
               </div>
             </div>
           </div>
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <div *ngIf="loggedIn">
-            <button (click)="logout()" class="text-gray-300 hover:bg-blue-700 hover:text-white rounded-md px-10 py-2 text-sm font-medium">Logout</button>
+            <button (click)="logout()" class="text-white hover:bg-blue-700 hover:text-white rounded-md px-10 py-2 text-2xl font-medium">Logout</button>
           </div>
       
           <div *ngIf="loggedIn" class="relative ml-3">

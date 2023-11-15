@@ -11,3 +11,5 @@ CREATE TABLE Tours(
 );
 
 SELECT * FROM Tours;
+
+DROP table Tours

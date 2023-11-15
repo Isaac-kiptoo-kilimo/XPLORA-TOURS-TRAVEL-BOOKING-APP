@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { map } from 'rxjs/operators'; 
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,21 @@ import { map } from 'rxjs/operators';
 export class UsersService {
 
   apiUrl='http://localhost:4500/users/checkUserDetails'
+  
 
   constructor(private http: HttpClient) { }
 
+
+
+getUsers(): Observable<User[]> {
+  const token = localStorage.getItem('token') as string;
+  return this.http.get<User[]>('http://localhost:4500/users/', {
+    headers: {
+      'Content-type': 'application/json',
+      'token': token
+    },
+  });
+}
 
 
   checkDetails(): Observable<string> {

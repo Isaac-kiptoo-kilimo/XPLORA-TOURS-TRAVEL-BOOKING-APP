@@ -18,14 +18,14 @@ Content-Type: application/json
    "password": "12345678@Ik" 
 }
 
-### fetching users
+### fetching all users
 GET http://localhost:4500/users/
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJmOTlhYzVlZS1jOWRhLTRmN2MtYjcxOS02MmFlMzZmNWI2YjUiLCJmdWxsTmFtZSI6IklzYWFjIEtpbGltbyIsImVtYWlsIjoiaXNhYWNraWxpbW9rMkBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTY5OTc5Mjc5NSwiZXhwIjoxNjk5OTY1NTk1fQ.pP5tp2mx2slxpvxOIuV1W2VPMFKcR1b-PUuSQrUzQPY
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJmOTlhYzVlZS1jOWRhLTRmN2MtYjcxOS02MmFlMzZmNWI2YjUiLCJmdWxsTmFtZSI6IklzYWFjIEtpbGltbyIsImVtYWlsIjoiaXNhYWNraWxpbW9rMkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDAwMTY0OTYsImV4cCI6MTcwMDE4OTI5Nn0.W9qfbenhU_KjXGxFYfVpCQ639KoZ9uI-RSvyx9cFuuA
 
 
 ### fetching user
 GET http://localhost:4500/users/details/f99ac5ee-c9da-4f7c-b719-62ae36f5b6b5/
-token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJmOTlhYzVlZS1jOWRhLTRmN2MtYjcxOS02MmFlMzZmNWI2YjUiLCJmdWxsTmFtZSI6IklzYWFjIEtpbGltbyIsImVtYWlsIjoiaXNhYWNraWxpbW9rMkBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTY5OTc5Mjc5NSwiZXhwIjoxNjk5OTY1NTk1fQ.pP5tp2mx2slxpvxOIuV1W2VPMFKcR1b-PUuSQrUzQPY
+token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJmOTlhYzVlZS1jOWRhLTRmN2MtYjcxOS02MmFlMzZmNWI2YjUiLCJmdWxsTmFtZSI6IklzYWFjIEtpbGltbyIsImVtYWlsIjoiaXNhYWNraWxpbW9rMkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDAwMTU3NTEsImV4cCI6MTcwMDE4ODU1MX0.EDDm3mPooDZV_Ei_d6nxjyJbGkJuKThtuuHcuA8hVNw
 
 
 
@@ -34,30 +34,53 @@ GET http://localhost:4500/users/checkUserDetails/
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJmOTlhYzVlZS1jOWRhLTRmN2MtYjcxOS02MmFlMzZmNWI2YjUiLCJmdWxsTmFtZSI6IklzYWFjIEtpbGltbyIsImVtYWlsIjoiaXNhYWNraWxpbW9rMkBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTY5OTc4NjY4NiwiZXhwIjoxNjk5OTU5NDg2fQ.o_KhU5tDSwNN_jj4u9cPUDH15EDdq8YNYY0tH-WQFLo
 
 
-###### creating new projects
-POST http://localhost:5200/project/
+###### creating new tour
+POST http://localhost:4500/tours/create
 Content-Type: application/json
 
 {
-    "project_name": "React project",
+    "name": "React project",
     "description": "to be ready by this weekend",
-    "endDate": "12/13/2023"
+    "destination": "Mt Elgon",
+    "type": "to be ready by this weekend",
+    "price": "11500",
+    "startDate": "12/13/2023",
+    "endDate": "12/13/2023",
+    "duration": "5"
 }
 
-### fetching all projects
-GET http://localhost:5200/project/
+### fetching all tours
+
+GET http://localhost:4500/tours/all
 
 
-### fetching all projects
-GET http://localhost:5200/project/763e48ed-5dbc-4401-b05d-3527828a1c61/
+### fetching one tour
+GET http://localhost:4500/tours/single/352ba489-4c63-4abd-8165-e573a528889e/
+
+###### book a tour
+POST http://localhost:4500/tours/book/
+Content-Type: application/json
+
+{
+    "userID": "e89cd53c-df5e-4ed4-a98a-9db4c7f9ced6",
+    "tourID": "3d5d6c71-77c8-49b2-8f8e-38f0b5a79fec"
+
+}
+
+
+
+### fetching booked tour
+GET http://localhost:4500/tours/bookedTours/e89cd53c-df5e-4ed4-a98a-9db4c7f9ced6/
 
 # Deleting a project
 ###
-DELETE http://localhost:5200/project/b5c6906b-3e90-44b8-b2dc-73dee6f3085a/
+DELETE http://localhost:4500/tours/c022d8bb-3443-4e12-b0a3-a62db6e53423/
+
+
 
 
 ### assigning a project to user
-POST http://localhost:5200/project/assign/user/
+POST http://localhost:5200/tours/assign/user/
 Content-Type: application/json
 
 {

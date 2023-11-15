@@ -4,8 +4,11 @@
 
 body {
     font-family: "Poppins", sans-serif;
-    color: #ffffff;
+    /* color: #ffffff; */
     background-color: #EAEDFE;
     scroll-behavior: smooth;
-  }
+  } 
 
+  .gradient {
+    background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+  }

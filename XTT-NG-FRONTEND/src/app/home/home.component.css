@@ -1,5 +1,38 @@
+.main-banner{
+  display: flex;
+  justify-content: center;
+}
+.bg-banner{
+  /* background-color: blue; */
+  margin: -40px 0 0 0;
+  padding: 50px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  width: 80%;
+  border-radius: 30px 0 30px 0;
+}
+.bg-banner h3{
+  border: 1px solid white;
+  padding: 10px;
+}
+/* .size-card{
+  width: 200px!important;
+} */
+
+.wave-top,.wave-bot{
+  background: linear-gradient(90deg, #0c4b9e, #08bd88, rgba(0, 0, 0, 0) 100%);
+}
 
 
+.img-about{
+  width: 600px;
+}
+
+.top-card{
+  width: 500px;
+} 
   
   p {
     font-family: "Poppins", sans-serif;
@@ -462,13 +495,13 @@
     color: #2c2d2e;
   }
   
-  .package_section .package_container .box .detail-box a:hover {
+  /* .package_section .package_container .box .detail-box a:hover {
     background: none;
     color: #ffffff;
     background: -webkit-gradient(linear, left top, right top, from(#3182cb), to(#2eb19c));
     background: linear-gradient(to right, #3182cb, #2eb19c);
   }
-  
+   */
   
   
   .package_section .package_container .box:hover .detail-box .price_detail, .package_section .package_container .box.active .detail-box .price_detail {
@@ -630,7 +663,7 @@
     margin-top: 45px;
   }
   
-  .client_section .carousel-control-prev,
+  /* .client_section .carousel-control-prev,
   .client_section .carousel-control-next {
     position: unset;
     width: 45px;
@@ -642,7 +675,7 @@
     background-position: center;
     border-radius: 100%;
     margin: 0 2.5px;
-  }
+  } */
   
   .client_section .carousel-control-prev:hover,
   .client_section .carousel-control-next:hover {

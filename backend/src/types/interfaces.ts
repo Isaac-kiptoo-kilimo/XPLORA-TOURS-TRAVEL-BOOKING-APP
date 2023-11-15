@@ -30,3 +30,10 @@ export interface TourBookingInput {
     comment: string;
   }
   
+  export interface updateUser{
+      userID:string,
+      fullName:string,
+      email:string,
+      password:string,
+     
+  }

@@ -18,3 +18,10 @@ export const dbConfig={
       trustServerCertificate: true
     }
 }
+
+const testConnection=()=>{
+  console.log('Connected to database');
+  
+}
+
+testConnection()
