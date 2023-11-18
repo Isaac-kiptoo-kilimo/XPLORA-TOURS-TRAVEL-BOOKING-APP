@@ -9,6 +9,9 @@ CREATE  TABLE Users(
 
 SELECT * FROM Users
 
+ALTER TABLE Users
+ADD resetPassword INT DEFAULT(0)
+
 UPDATE Users SET role = 'admin' WHERE email = 'isaackilimok2@gmail.com'
 
 DROP TABLE Users

@@ -1,0 +1,4 @@
+CREATE OR ALTER PROCEDURE bookTour( @userID VARCHAR(100))
+AS BEGIN
+    UPDATE Users SET hasBooked = 1 WHERE userID = @userID
+END
