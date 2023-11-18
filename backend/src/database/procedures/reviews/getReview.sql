@@ -1,4 +1,7 @@
+CREATE OR ALTER PROCEDURE getAllReviews
 
+AS 
+BEGIN
+    SELECT * FROM Reviews 
 
-
-SELECT * FROM Reviews WHERE tourID = 'yourTourID';
+END

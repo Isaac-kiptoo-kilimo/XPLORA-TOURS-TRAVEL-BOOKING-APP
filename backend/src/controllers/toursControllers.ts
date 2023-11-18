@@ -170,6 +170,7 @@ export const getBookedToursControllers= async(req:Request,res:Response)=>{
         console.log('getting booked tours successfully');
         
         return res.status(200).json(results.recordset);
+        
     }catch(error){
         console.error('Error in getting booked tour', error);        
         return res.status(500).json({

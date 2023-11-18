@@ -23,7 +23,7 @@ GET http://localhost:4500/users/
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJmOTlhYzVlZS1jOWRhLTRmN2MtYjcxOS02MmFlMzZmNWI2YjUiLCJmdWxsTmFtZSI6IklzYWFjIEtpbGltbyIsImVtYWlsIjoiaXNhYWNraWxpbW9rMkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDAyOTYwODIsImV4cCI6MTcwMDQ2ODg4Mn0.jK91lrBPSp7dR9tzAWmAqFJ5-hw2CZiBMAqz0C6MB8g
 
 
-###
+###update user
 POST http://localhost:4500/users/updateUser/18b1d912-6bee-4648-b22d-b64ad7ac5e63/
 Content-Type: application/json
 
@@ -99,15 +99,31 @@ Content-Type: application/json
 
 }
 
-
-
 ### fetching booked tour
 GET http://localhost:4500/tours/bookedTours/e89cd53c-df5e-4ed4-a98a-9db4c7f9ced6/
+
 
 # Deleting a project
 ###
 DELETE http://localhost:4500/tours/c022d8bb-3443-4e12-b0a3-a62db6e53423/
 
 
+### create reviews
+POST http://localhost:4500/reviews/create/
+Content-Type: application/json
+
+{
+    "userID": "960a0af1-c8cf-4dab-a16e-21bf33be0f28",
+    "tourID": "329e9380-e68c-4a82-8625-7d4f694617c4",
+    "comment": "It was so amazing,I enjoyed",
+    "rating": "5"
+}
+
+### fetching all reviews
+GET http://localhost:4500/reviews/all/
+
+
+### fetching all reviews
+GET http://localhost:4500/reviews/userReview/960a0af1-c8cf-4dab-a16e-21bf33be0f28/e89cd53c-df5e-4ed4-a98a-9db4c7f9ced6/
 
 
