@@ -1,17 +1,15 @@
--- GET SINGLE USER PROCEDURE
--- CREATE OR ALTER PROCEDURE [dbo].[getUserById]
--- 	@id	varchar(250)
--- as
 
--- set nocount on;
+CREATE OR ALTER PROCEDURE getSingleUser(
+    @userID	varchar(100)
+)
 
--- begin
--- 	select	u.[_id],
--- 			u.email,
--- 			u.username,
--- 			u.role
+AS
+BEGIN
+	SELECT	userID,
+			email,
+			fullName,
+			role
 		
--- 	from	[users] u where _id= @id and isDeleted = 0;
--- end;
+	from	Users where userID= @userID
+END
 
--- exec getUserById

@@ -2,7 +2,7 @@ import {Request,Response, json} from 'express';
 import Connection from '../dbHelpers/dbHelpers';
 import { v4 } from 'uuid'
 import bcrypt from 'bcrypt'
-import { regUserValidation } from '../validators/validators';
+import { regUserValidation, validateUpdateuser } from '../validators/validators';
 import { comparedPass } from '../utils/comparedPass';
 import { ExtendedUser, verifyToken } from '../middlewares/verifyToken';
 import { tokenGenerator } from '../utils/generateToken';
@@ -122,6 +122,8 @@ export const getUserDetails=async(req:Request,res:Response)=>{
       }
 }
 
+
+
 export const getAllUsersControllers=async(req:Request, res:Response)=>{
     try{
         const users=(await dbhelpers.execute('fetchAllUsers')).recordset
@@ -135,57 +137,85 @@ export const getAllUsersControllers=async(req:Request, res:Response)=>{
 }
 
 
-// export const updateUserController = async (req: Request, res: Response) => {
-//   try {
-//     const { userID, fullName, email ,password} = req.body;
-//     let hashedPwd=await bcrypt.hash(password , 5)
 
-//     const { error } = validateUpdateuser.validate(req.body);
-//     if (error)
-//       return res
-//         .status(400)
-//         .send({ success: false, message: error.details[0].message });
+export const updateUserController = async (req: Request, res: Response) => {
+  try {
+    const { fullName, email } = req.body;
+    const {userID}=req.params
 
-//     const newUser: updateUser = {
-//       userID,
-//       fullName,
-//       email,
-//       password:hashedPwd,
-//     };
+    const { error } = validateUpdateuser.validate(req.body);
+    if (error)
+      return res.status(403).json({ success: false, message: error.details[0].message });
+     
+    // console.log(updatedUser);
 
-//     const procedureName = "updateUser";
-//     const params = newUser;
-//     // console.log(params);
+    const updatedUser=await dbhelpers.execute('updateUser', {userID,fullName,    email});
 
-//     await dbhelpers.execute(procedureName, {params});
-//     return res.send({ message: "User updated successfully" });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).send({
-//       error: (error as Error).message,
-//       message: "Internal Sever Error",
-//     });
-//   }
-// };
+    return res.json({ 
+        message: "User updated successfully" 
+    });
 
-// export const getUser = async (req: Request, res: Response) => {
-//     try {
-//       const userID = req.params.userID;
-//       // console.log(id);
-//       if (!id) return res.status(400).send({ message: "Id is required" });
+
+  } catch (error) {
+
+    console.log(error);
+    return res.status(500).json({
+      error: error,
+    });
+  }
+};
+
+
+
+export const getSingleUserController = async (req: Request, res: Response) => {
+    try {
+      const userID = req.params.userID;
+      console.log(userID);
+      if (!userID) return res.status(403).send({ message: "Id is required" });
   
-//       const { error } = validateuserId.validate(req.params);
+      
+      const result = await dbhelpers.execute('getSingleUser', { userID });
   
-//       if (error)
-//         return res
-//           .status(400)
-//           .send({ success: false, message: error.details[0].message });
-  
-//       const procedureName = "getUserById";
-//       const result = await dbhelpers.execute(procedureName, { userID });
-  
-//       res.json(result.recordset);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
+      res.json(result.recordset);
+      
+    } catch (error) {
+      return res.json(400).json({
+        error:error
+      })
+    }
+  };
+
+  export const deleteUserController=async(req:Request,res:Response)=>{
+    try{
+        const {userID}=req.params
+
+        const deleteUser=await dbhelpers.execute('deleteUser',{userID})
+        return res.json({
+            message:'User deleted successfully'
+        })
+    }catch(error){
+        return res.json({
+            error:error
+        })
+    }
+  }
+
+  export const resetPasswordControllers=(req:Request,res:Response)=>{
+    try{
+
+    }catch(error){
+        return res.json({
+            error:error
+        })
+    }
+  }
+
+  export const forgotPasswordController=(req:Request,res:Response)=>{
+    try{
+
+    }catch(error){
+         return res.json({
+            error:error
+        })
+    }
+  }

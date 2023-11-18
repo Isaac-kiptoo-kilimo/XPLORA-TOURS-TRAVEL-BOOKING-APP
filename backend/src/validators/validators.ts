@@ -29,6 +29,17 @@ export const loginUserValidation=Joi.object({
 
 })
 
+// update user validators
+
+export const validateUpdateuser=Joi.object({
+    fullName: Joi.string().required().min(3).max(30),
+    email : Joi.string().required().email({
+        minDomainSegments:2, tlds:{
+            allow: ['com', 'ke']
+        }
+    })
+})
+
 
 // create tours validation
 export const validateCreateTour=Joi.object({

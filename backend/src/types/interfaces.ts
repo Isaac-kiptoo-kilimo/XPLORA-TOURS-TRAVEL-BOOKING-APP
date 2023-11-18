@@ -35,7 +35,5 @@ export interface TourBooking {
   export interface updateUser{
       userID:string,
       fullName:string,
-      email:string,
-      password:string,
-     
+      email:string    
   }
