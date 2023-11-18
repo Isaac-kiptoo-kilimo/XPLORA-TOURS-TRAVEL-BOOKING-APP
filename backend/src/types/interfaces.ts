@@ -18,9 +18,11 @@ export interface Tour{
     duration:string
 }
 
-export interface TourBookingInput {
+export interface TourBooking {
+    bookingID:string,
     userId: string;
     tourId: string;
+    bookingDate: string,
   }
   
  export interface TourReviewInput {

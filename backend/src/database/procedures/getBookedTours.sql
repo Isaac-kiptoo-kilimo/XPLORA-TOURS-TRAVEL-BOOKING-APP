@@ -6,6 +6,7 @@ BEGIN
 
 END
 
+
 GO
 -- CREATE OR ALTER PROCEDURE getBookedTours (@userID VARCHAR(100))
 -- AS

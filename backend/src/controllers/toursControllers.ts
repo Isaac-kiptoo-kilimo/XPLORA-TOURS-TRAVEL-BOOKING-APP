@@ -4,19 +4,24 @@ import {v4} from 'uuid'
 import { dbConfig } from '../config/db'
 import mssql from 'mssql'
 import { Tour } from '../types/interfaces'
+import { validateCreateTour, validateUpdateTour } from '../validators/validators'
 
 const dbhelpers=new Connection
+
+
 
 export const createTourController= async(req:Request,res:Response)=>{
    
    try{ const {name,description,destination,price,type,startDate,endDate,duration}=req.body;
+
     const tourID=v4()
 
-
+    const {error}=validateCreateTour.validate(req.body)
+    if (error)
+        return res.status(403).json({ message: "Enter correct details" });
+  
     const tour=await dbhelpers.execute('createTours',{ tourID, name,description,destination,price,type,startDate,endDate,duration})
-    // console.log(tour.recordset);
-    // console.log(tour);
-    
+  
     
     return res.status(201).json({
         messge:"Created tour Successfully"
@@ -51,6 +56,7 @@ export const  getSingleTourController=async (req:Request,res:Response)=>{
           const {tourID}=req.params;
 
           console.log(tourID);
+          if (!tourID) return res.status(400).send({ message: "Id is required" });
           const data = {
                 tourID: tourID,
               };
@@ -59,65 +65,49 @@ export const  getSingleTourController=async (req:Request,res:Response)=>{
           
         
 
-    }catch(err){
-          console.log(err)
+    }catch(error){
+          return res.json({
+            error:error
+          })
 
     }
 
 }
 
-// export const getTour = async (req: Request, res: Response) => {
-//     try {
-//       const tour_id = req.params.tour_id;
-//       // console.log(id);
-//       if (!tour_id) return res.status(400).send({ message: "Id is required" });
-  
-//       const { error } = validateTourId.validate(req.params);
-  
-//       if (error)
-//         return res
-//           .status(400)
-//           .send({ success: false, message: error.details[0].message });
-  
-//       const procedureName = "getTourById";
-//       const result = await execute(procedureName, { tour_id });
-  
-//       res.json(result.recordset);
-//     } catch (error) {
-//       console.log(error);
-//       res.status(404).send({ message: "internal server error" });
-//     }
-//   };
 
-// export const updateTour = async (req: Request, res: Response) => {
-//     try {
-//       const { tour_id, tour_name, tour_description, dueDate } = req.body;
+export const updateTourController = async (req: Request, res: Response) => {
+    try {
+      const { name, description,destination,price,type,startDate,endDate,duration } = req.body;
+        const {tourID}=req.params
+      const { error } = validateUpdateTour.validate(req.body);
+      console.log(error);
+      
+      if (error)
+        return res.status(403).json({ message: "Enter correct details" });
   
-//       const { error } = validateUpdateTour.validate(req.body);
-//       if (error)
-//         return res.status(400).send({ message: "please put correct details" });
+      const newTour = {
+        tourID,
+        name,
+        description,
+        startDate,
+        destination,
+        price,
+        type,
+        endDate,
+        duration
+      };
   
-//       const newTour: Tour = {
-//         tour_id,
-//         tour_name,
-//         tour_description,
-//         dueDate,
-//       };
   
-//       const ProcedureName = "updateTour";
-//       const params = newTour;
+      let result=await dbhelpers.execute('updateTour', newTour);
   
-//       await execute(ProcedureName, params);
-  
-//       return res.status(200).send({ message: "Tour updated successfully" });
-//     } catch (error) {
-//       console.log(error);
-//       res.status(500).send({
-//         error: (error as Error).message,
-//         message: "Internal Sever Error",
-//       });
-//     }
-//   };
+      return res.status(201).json({ message: "Tour updated successfully" });
+    } catch (error) {
+      console.log(error);
+      res.status(502).json({
+        error: error
+      });
+    }
+  };
 
 export const deleteTourController=async(req:Request,res:Response)=>{
     try{
@@ -149,7 +139,7 @@ export const deleteTourController=async(req:Request,res:Response)=>{
     }
 }
 
-export const bookTourControler= async(req:Request,res:Response)=>{
+export const bookTourController= async(req:Request,res:Response)=>{
     try{
         const {userID,tourID}=req.body;
         const bookingID=v4()

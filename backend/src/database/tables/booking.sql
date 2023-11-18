@@ -7,3 +7,6 @@ CREATE TABLE Bookings (
     bookingDate DATETIME DEFAULT GETDATE(),
     CONSTRAINT UC_Bookings UNIQUE (userID, tourID)
 );
+
+
+SELECT * FROM Bookings

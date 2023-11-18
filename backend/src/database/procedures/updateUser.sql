@@ -1,16 +1,11 @@
--- UPDATE USER PROCEDURE
--- CREATE OR ALTER  PROCEDURE [dbo].[updateUser]
--- 	@id varchar(100),
--- 	@username varchar(100),
--- 	@email varchar(250)
--- 	as
 
--- set nocount on;
-
--- begin
--- 	UPDATE dbo.users
--- 	SET 
--- 	username=@username,
--- 	email=@email 	
--- 	WHERE _id = @id;
--- end;
+CREATE OR ALTER  PROCEDURE updateUser(
+    @userID VARCHAR(100),
+    @fullName VARCHAR(200),
+    @email VARCHAR(250)
+    
+)
+AS
+BEGIN
+	UPDATE Users SET fullName=@fullName,email=@email WHERE userID = @userID;
+end;

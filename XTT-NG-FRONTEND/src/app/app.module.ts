@@ -27,7 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     UserComponent,
     ToursComponent,
     NotFoundComponent,
-    
+
   ],
   imports: [
     BrowserModule,

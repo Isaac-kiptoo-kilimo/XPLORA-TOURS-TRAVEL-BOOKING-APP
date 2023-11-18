@@ -57,6 +57,22 @@ GET http://localhost:4500/tours/all
 ### fetching one tour
 GET http://localhost:4500/tours/single/352ba489-4c63-4abd-8165-e573a528889e/
 
+
+###### Updating tour
+POST http://localhost:4500/tours/update/39f7e435-6b1f-401a-8e7c-56c26e2a2fb5/
+Content-Type: application/json
+
+{
+    "name": "Daring the waters",
+    "description": "We will have swimming activities",
+    "destination": "londiani and malindi",
+    "price": 7000,
+    "type": "culture",
+    "startDate": "2023-11-10",
+    "endDate": "2023-11-22",
+    "duration": "7"
+  }
+
 ###### book a tour
 POST http://localhost:4500/tours/book/
 Content-Type: application/json

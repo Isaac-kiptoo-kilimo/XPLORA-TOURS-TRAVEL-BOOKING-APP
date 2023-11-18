@@ -9,3 +9,11 @@ export interface Tour {
     endDate:string,
     duration:string
 }
+
+
+export interface TourBooking extends Tour {
+    bookingID:string,
+    userId: string;
+    tourId: string;
+    bookingDate: string,
+  }

@@ -1,18 +1,26 @@
--- CREATE PROCEDURE [dbo].[updateTour]
--- 	@tour_id varchar(100),
--- 	@tour_name varchar(100),
--- 	@duedate date,
--- 	@tour_description varchar(500)
--- as
-
--- set nocount on;
-
--- begin
--- 	UPDATE dbo.tours
--- 	SET 
--- 	tour_name=@tour_name,
--- 	tour_description=@tour_description,
--- 	duedate=@duedate
+CREATE OR ALTER PROCEDURE updateTour(
+      @tourID VARCHAR(100),
+      @name VARCHAR(200),
+      @description VARCHAR(300),
+      @destination VARCHAR (250),
+      @price INT,
+      @type VARCHAR(200),
+      @startDate VARCHAR(200), 
+      @endDate VARCHAR(200),
+      @duration VARCHAR (100)
+)
+AS
+BEGIN
+	UPDATE Tours
+	SET 
+	name=@name,
+	description=@description,
+    destination=@destination,
+    price=@price,
+    type=@type,
+	startDate=@startDate,
+    endDate=@endDate,
+    duration=@duration
 	
--- 	WHERE tour_id = @tour_id ;
--- end;
+	WHERE tourID = @tourID ;
+END;
