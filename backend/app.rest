@@ -103,7 +103,7 @@ Content-Type: application/json
 GET http://localhost:4500/tours/bookedTours/e89cd53c-df5e-4ed4-a98a-9db4c7f9ced6/
 
 
-# Deleting a project
+# Deleting a tour
 ###
 DELETE http://localhost:4500/tours/c022d8bb-3443-4e12-b0a3-a62db6e53423/
 
@@ -123,7 +123,18 @@ Content-Type: application/json
 GET http://localhost:4500/reviews/all/
 
 
-### fetching all reviews
-GET http://localhost:4500/reviews/userReview/960a0af1-c8cf-4dab-a16e-21bf33be0f28/e89cd53c-df5e-4ed4-a98a-9db4c7f9ced6/
+### fetching reviews based on user and the tour
+GET http://localhost:4500/reviews/userReview/960a0af1-c8cf-4dab-a16e-21bf33be0f28/329e9380-e68c-4a82-8625-7d4f694617c4/
 
+### updating the user reviews
+POST http://localhost:4500/reviews/update/abac9789-f4b4-421c-9dee-ef31ccd383dc/
+Content-Type: application/json
 
+{
+    "comment": "It was one of its kind",
+    "rating": "8"
+}
+
+# Deleting a tour
+###
+DELETE http://localhost:4500/reviews/delete/abac9789-f4b4-421c-9dee-ef31ccd383dc/

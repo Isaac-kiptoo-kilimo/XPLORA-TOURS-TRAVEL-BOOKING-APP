@@ -32,6 +32,11 @@ export const getAllReviewsControllers=async (req:Request,res:Response)=>{
     try{
         
         const reviews=(await dbhelpers.execute('getAllReviews')).recordset;
+        if (reviews.length === 0) {
+            return res.status(404).json({
+                message: 'No reviews found at the moment.',
+            });
+        }
 
         return res.status(201).json(reviews)
 
@@ -45,16 +50,20 @@ export const getAllReviewsControllers=async (req:Request,res:Response)=>{
 export const getUserReviewsControllers=async (req:Request,res:Response)=>{
     try{
         const {tourID,userID}=req.params
-        if(!tourID ){
-            return res.send({
-                message:'The Tour/event does not exist'
-            })
-        }else{
-            const reviews=(await dbhelpers.execute('getReviewsByUserAndTour',{tourID,userID})).recordset;
-
-            return res.status(201).json(reviews)
+        if (!tourID || !userID) {
+            return res.status(400).json({
+                message: 'Both tourID and userID are required in the request parameters.',
+            });
         }
-        
+        const reviews=(await dbhelpers.execute('getReviewsByUserAndTour',{tourID,userID})).recordset;
+
+        if (reviews.length === 0) {
+            return res.status(404).json({
+                message: 'No reviews found for the specified user and tour.',
+            });
+        }
+
+        return res.status(201).json(reviews)
 
     }catch(error){
         return res.json({
@@ -65,25 +74,41 @@ export const getUserReviewsControllers=async (req:Request,res:Response)=>{
 
 
 
-export const updateReviewController= async(req:Request,res:Response)=>{
-    try{
-        const {rating,comment }=req.body
-        const {reviewID}=req.params
-        await dbhelpers.execute('',{rating,comment,reviewID})
-        res.status(200).send('Review updated successfully');
-    }catch(error){
-        return res.json({
-            error:error
-        })
+export const updateReviewController = async (req: Request, res: Response) => {
+    try {
+        const { rating, comment } = req.body;
+        const { reviewID } = req.params;
+
+        const existingReview = await dbhelpers.execute('getReviewById', { reviewID });
+        if (!Array.isArray(existingReview) || existingReview.length === 0) {
+            return res.status(404).json({
+                message: 'Review not found.',
+            });
+        }
+                
+        const updatedReviews = await dbhelpers.execute('updateReview', { rating, comment, reviewID });
+
+        return res.status(200).json({
+            message: 'Review updated successfully',
+        });
+    } catch (error:any) {
+        return res.status(500).json({
+            error: error.message || 'Internal Server Error',
+        });
     }
-}
+};
+
 
 
 export const deleteReviewController=async (req:Request,res:Response)=>{
     try{
         const {reviewID}=req.params
-
-        const deleteResults=await dbhelpers.execute('',{reviewID})
+        if(!reviewID){
+            return res.status(400).json({
+                message: 'There is no review with such id',
+            });
+        }
+        const deleteResults=await dbhelpers.execute('deleteReview',{reviewID})
         return res.status(201).json({
             message:"Deleted successfully"
         })
