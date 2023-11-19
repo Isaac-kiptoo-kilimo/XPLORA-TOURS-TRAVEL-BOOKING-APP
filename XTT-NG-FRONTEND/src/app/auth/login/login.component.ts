@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { userLogin } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -15,8 +14,8 @@ export class LoginComponent {
 
   logInUserForm: FormGroup;
 
-  errorMessage: string = '';
-  successMessage: string = '';
+  errorMessage!: string;
+  successMessage!: string ;
   loggingIn: boolean = false;
   loggedInState: boolean = false;
   loggedIn: boolean = false;
@@ -37,7 +36,11 @@ export class LoginComponent {
 
 // }
 
-
+getErrorMessage(controlName: string) {
+  const control = this.logInUserForm.get(controlName);
+  return control?.hasError('required') ? 'This field is required' :
+    control?.hasError('email') ? 'Not a valid email' :'';
+}
 
   loginUser() {
     if (this.logInUserForm.invalid) {
@@ -80,7 +83,11 @@ export class LoginComponent {
       },
       (error) => {
         console.error('Error during login:', error);
-        this.errorMessage = 'An unexpected error occurred.';
+        if (error.status === 401) {
+          this.errorMessage = 'Invalid email or password.';
+        } else {
+          this.errorMessage = 'An unexpected error occurred.';
+        }
         setTimeout(() => {
           this.errorMessage = '';
           this.loggingIn = false;

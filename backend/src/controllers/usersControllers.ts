@@ -67,20 +67,31 @@ export const loginUserController=async (req:Request,res:Response)=>{
         
 
         const validPass=await comparedPass(password,user.password)
-        const token=tokenGenerator(
-            user.userID,
-            user.fullName,
-            user.email,
-            user.role
-        )
-
-        console.log(token);
-
+        if(!validPass){
+            console.log("pasword does not match");
+            
+            return res.status(404).json({
+                error:"Password do not match"
+            })
+        }else{
+            const token=tokenGenerator(
+                user.userID,
+                user.fullName,
+                user.email,
+                user.role
+            )
+            console.log(token);
+            console.log("logged in successfully");
+            
         return res.json({
             message:"logged in successfully",
             token      
             
         })
+        }
+        
+
+        
 
     }else{
         return res.status(404).json({

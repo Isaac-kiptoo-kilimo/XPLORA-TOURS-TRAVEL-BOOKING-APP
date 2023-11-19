@@ -49,12 +49,12 @@
                           <div class="grid gap-4 mb-4 grid-cols-2">
                               <div class="col-span-2">
                                   <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                  <input type="text" formControlName="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                                  <input type="text" formControlName="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Tour Name" required="">
                               </div>
                            
                             <div class="col-span-2">
                               <label for="destination" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Destination</label>
-                              <input type="text" formControlName="destination" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                              <input type="text" formControlName="destination" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Destination" required="">
                           </div>
                               <div class="col-span-2 sm:col-span-1">
                                   <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
@@ -63,24 +63,25 @@
                               <div class="col-span-2 sm:col-span-1">
                                   <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
                                   <select formControlName="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" >
-                                      <option selected="">Tour Type</option>
-                                      <option value="TV">Hiking</option>
-                                      <option value="PC">Cultural Excursions</option>
-                                      <option value="GA">Weekend Gateways</option>
-                                      <option value="PH">Mountain Climbing</option>
+                                    <option value="" disabled selected>Select Tour Type</option>                                      <option value="Hiking">Hiking</option>
+                                      <option value="Cultural Excursions">Cultural Excursions</option>
+                                      <option value="Weekend Gateways">Weekend Gateways</option>
+                                      <option value="Mountain Climbing">Mountain Climbing</option>
                                   </select>
                               </div>
                               <div class="col-span-2">
                                   <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                                  <textarea formControlName="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write product description here"></textarea>                    
+                                  <textarea formControlName="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write Tour description here"></textarea>                    
                               </div>
                               <div class="col-span-2">
                                 <label for="startDate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start Date</label>
                                 <input type="date" formControlName="startDate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                                <div *ngIf="createTourForm.get('startDate')?.hasError('startDateInvalid')" class="text-red-500">Start date should be greater than or equal to today</div>
                             </div>
                             <div class="col-span-2">
                               <label for="endDate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">End Date</label>
                               <input type="date" formControlName="endDate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                              <div *ngIf="createTourForm.get('endDate')?.hasError('endDateInvalid')" class="text-red-500">End date should be greater than start date</div>
                           </div>
                           <div class="col-span-2">
                             <label for="duration" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Duration</label>

@@ -106,7 +106,7 @@ GET http://localhost:4500/tours/bookedTours/eb1f32f0-a5e9-4b89-9431-b61374e33432
 
 # Deleting a tour
 ###
-DELETE http://localhost:4500/tours/2bd4bb82-7f07-443f-b6d5-0a7659236541/
+DELETE http://localhost:4500/tours/5cce8f95-b5bb-47db-bc92-a500c401ae93/
 
 
 ### create reviews

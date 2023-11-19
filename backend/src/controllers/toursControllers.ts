@@ -172,6 +172,7 @@ export const getBookedToursControllers= async(req:Request,res:Response)=>{
         const {userID}=req.params;
         const results=await dbhelpers.execute('getBookedTours',{userID})
         // console.log('getting booked tours successfully');
+        console.log(results.recordset);
         
         return res.status(200).json(results.recordset);
         

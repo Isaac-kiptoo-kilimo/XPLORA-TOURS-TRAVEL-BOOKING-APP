@@ -18,34 +18,61 @@ export class AdminComponent {
   loggedIn=true
 
   createTourForm!: FormGroup
-  // isFormVisible: boolean = false; 
   tours!: Tour[];
   users!: User[];
-  // visible = true
- 
 
-  constructor(private tourService: TourService, private formBuilder:FormBuilder,private router: Router, private userService:UsersService,private modalCommunicationService: ModalCommunicationService,private cdr: ChangeDetectorRef ){
+  constructor(
+    private tourService: TourService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private userService: UsersService,
+    private modalCommunicationService: ModalCommunicationService,
+    private cdr: ChangeDetectorRef
+  ) {
+    this.createTourForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      destination: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      type: ['', [Validators.required]],
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]],
+      duration: [''],
+    }, {
+      validators: [this.dateValidators]
+    });
+  }
 
-    this.createTourForm=this.formBuilder.group({
-      name:['',[Validators.required]], 
-      description: ['',[Validators.required]],
-      destination: ['',[Validators.required]],
-      price: ['',[Validators.required]],
-      type: ['',[Validators.required]],
-      startDate:['',[Validators.required]],
-      endDate:['',[Validators.required]],
-      duration:['',[Validators.required]],
-    })
+  dateValidators(formGroup: FormGroup) {
+    const startDate = formGroup.get('startDate')?.value;
+    const endDate = formGroup.get('endDate')?.value;
 
+    if (startDate && endDate && new Date(endDate) <= new Date(startDate)) {
+      formGroup.get('endDate')?.setErrors({ endDateInvalid: true });
+    } else {
+      formGroup.get('endDate')?.setErrors(null);
+    }
+
+    const currentDate = new Date();
+    if (startDate && new Date(startDate) < currentDate) {
+      formGroup.get('startDate')?.setErrors({ startDateInvalid: true });
+    } else {
+      formGroup.get('startDate')?.setErrors(null);
+    }
+
+    // Only update duration when both start and end dates are valid
+    if (startDate && endDate && !formGroup.hasError('endDateInvalid') && !formGroup.hasError('startDateInvalid')) {
+      const startDateTime = new Date(startDate).getTime();
+      const endDateTime = new Date(endDate).getTime();
+      const duration = Math.round((endDateTime - startDateTime) / (1000 * 60 * 60 * 24));
+      formGroup.get('duration')?.setValue(duration);
+    }
   }
 
   ngOnInit() {
     this.getTours();
     this.getUsers();
-    
   }
-
-
 
   getTours() {
     this.tourService.getTours().subscribe(
@@ -64,7 +91,6 @@ export class AdminComponent {
       () => {
         this.tours.push(createTour)
         this.getTours();
-        // this.router.navigate(['admin']);
         console.log('Tours created successfully');
         this.modalCommunicationService.notifyTourAdded();
         this.visible=true
@@ -74,10 +100,7 @@ export class AdminComponent {
         console.error('Error creating tours:', error);
       }
     );
-
-    
   }
-
 
   getUsers() {
     this.userService.getUsers().subscribe(
@@ -90,9 +113,6 @@ export class AdminComponent {
     );
   }
 
-
-
-
   loadTours(): void {
     this.tourService.getTours().subscribe(
       (tours) => {
@@ -104,9 +124,8 @@ export class AdminComponent {
     );
   }
 
-
   deleteTour(tourID: string): void {
-    alert('Are you sure You want to delete,this action is irreversible')
+    alert('Are you sure You want to delete, this action is irreversible')
     this.tourService.deleteTour(tourID).subscribe(
       () => {
         this.loadTours();
@@ -116,6 +135,4 @@ export class AdminComponent {
       }
     );
   }
-
-  
 }
