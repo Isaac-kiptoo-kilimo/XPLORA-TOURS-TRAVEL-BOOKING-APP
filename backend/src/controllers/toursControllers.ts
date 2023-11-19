@@ -183,3 +183,22 @@ export const getBookedToursControllers= async(req:Request,res:Response)=>{
         })
     }
 }
+
+export const searchTourchByType=async (req:Request,res:Response)=>{
+  try{
+    const type = req.query.type as string;    console.log(type);
+    
+    if (!type) {
+      return res.status(400).json({ message: 'Type parameter is required.' });
+    }
+
+    const result = await dbhelpers.execute('searchTourByType',{type})
+    const tours = result.recordset;
+    console.log(tours);
+    
+
+    res.json(tours);
+  }catch(eror){
+
+  }
+}

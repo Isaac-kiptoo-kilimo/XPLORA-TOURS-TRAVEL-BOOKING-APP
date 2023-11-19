@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Tour, TourBooking } from 'src/app/interfaces/tour';
 import { User,UserDetails} from 'src/app/interfaces/user';
@@ -30,7 +31,7 @@ export class UserComponent implements OnInit{
   
   tourID! : string;
  
-  constructor(private tourService: TourService,private authService: AuthService, private route: ActivatedRoute,private userService:UsersService,private bookTourService:BookTourService ) {
+  constructor(private tourService: TourService,private authService: AuthService, private route: ActivatedRoute,private userService:UsersService,private bookTourService:BookTourService ,private formBuilder:FormBuilder) {
     
    
   }
@@ -125,6 +126,26 @@ export class UserComponent implements OnInit{
         console.error('Error fetching booked tours:', error);
       }
     );
+  }
+
+  searchForm = this.formBuilder.group({
+    type: [''],
+  });
+
+  searchTours() {
+    const type = this.searchForm.value.type;
+    if (type) {
+      this.tourService.searchToursByType(type).subscribe(
+        (tours) => {
+          this.tours = tours;
+        },
+        (error) => {
+          console.error('Error fetching tours:', error);
+        }
+      );
+    } else {
+      this.getTours();
+    }
   }
 
   }

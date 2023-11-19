@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -11,10 +12,13 @@ export class NavbarComponent {
 
   visible = true;
   loggedIn: boolean = false;
+  tourService: any;
 
- constructor(private router: Router, private authService: AuthService) {
+ constructor(private router: Router, private authService: AuthService, private formBuilder:FormBuilder) {
     this.loggedIn = authService.isLoggedIn();
   }
+
+ 
 
   logout() {
     this.router.navigate(['']);

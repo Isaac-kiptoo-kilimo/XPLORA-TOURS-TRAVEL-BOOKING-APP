@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Tour } from '../interfaces/tour';
@@ -25,6 +25,13 @@ export class TourService {
     return this.http.delete(`http://localhost:4500/tours/${tourID}`)
    
   }
+
+  searchToursByType(type: string): Observable<Tour[]> {
+    const params = new HttpParams().set('type', type);
+    return this.http.get<Tour[]>('http://localhost:4500/tours/search', { params });
+  }
 }
+
+
 
 

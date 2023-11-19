@@ -89,6 +89,9 @@ Content-Type: application/json
     "duration": "7"
   }
 
+### search tour by types
+GET http://localhost:4500/tours/search?type=GA
+
 ###### book a tour
 POST http://localhost:4500/tours/book/
 Content-Type: application/json
