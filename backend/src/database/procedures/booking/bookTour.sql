@@ -10,3 +10,4 @@ AS BEGIN
     VALUES (@bookingID, @userID, @tourID);
 END
 
+DROP PROCEDURE bookingTour

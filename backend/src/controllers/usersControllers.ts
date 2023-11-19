@@ -97,31 +97,31 @@ export const checkCredentials=(req:ExtendedUser,res:Response)=>{
     }
 }
 
-
-export const getUserDetails=async(req:Request,res:Response)=>{
-
+export const getUserDetails = async (req: ExtendedUser, res: Response) => {
     try {
+        const user = req.info;
 
-       const userID =req.params.userID
-       console.log(userID);       
-    
-        const result = await dbhelpers.execute('GetUserDetails',{userID});
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const userID = user.userID; 
+        const result = await dbhelpers.execute('GetUserDetails', { userID });
         const userDetails = result.recordset[0];
+
+        if (!userDetails) {
+            return res.status(404).json({ message: 'User details not found' });
+        }
 
         console.log(userDetails);
         
-        if (!userDetails) {
-          return res.status(404).json({ message: 'User not found' });
-        }
-    
-        res.json(userDetails);
+        return res.status(200).json(userDetails);
 
-      } catch (error) {
+    } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
-      }
-}
-
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+};
 
 
 export const getAllUsersControllers=async(req:Request, res:Response)=>{

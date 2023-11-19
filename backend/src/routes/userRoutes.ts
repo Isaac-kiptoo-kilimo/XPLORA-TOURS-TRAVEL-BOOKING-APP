@@ -12,7 +12,7 @@ userRouter.post('/register', registerUserController);
 userRouter.post('/login', loginUserController);
 userRouter.post('/updateUser/:userID', updateUserController);
 userRouter.get('/',verifyToken,getAllUsersControllers);
-userRouter.get('/details/:userID',verifyToken, getUserDetails);
+userRouter.get('/details',verifyToken, getUserDetails);
 userRouter.get('/checkUserDetails', verifyToken, checkCredentials);
 userRouter.get('/singleUser/:userID',verifyToken,getSingleUserController)
 userRouter.delete('/delete/:userID',deleteUserController)

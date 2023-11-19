@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Tour, TourBooking } from 'src/app/interfaces/tour';
-import { User } from 'src/app/interfaces/user';
+import { User,UserDetails} from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { BookTourService } from 'src/app/services/book-tour.service';
 import { TourService } from 'src/app/services/tour.service';
@@ -15,7 +15,7 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit{
-  userDetails!: User;
+  userDetails!: UserDetails;
   visible = true
   notVisible=false
   loggedIn=true
@@ -24,33 +24,35 @@ export class UserComponent implements OnInit{
 
   bookedTours: TourBooking[] = [];
   userID! : string;
+  selectedTourID!: string ;
+  // selectedTourID: string = '3d5d6c71-77c8-49b2-8f8e-38f0b5a79fec'
+
   
   tourID! : string;
-  
-
-  constructor(private tourService: TourService,private authService: AuthService, private route: ActivatedRoute,private userService:UsersService,private bookTourService:BookTourService ) {}
+ 
+  constructor(private tourService: TourService,private authService: AuthService, private route: ActivatedRoute,private userService:UsersService,private bookTourService:BookTourService ) {
+    
+   
+  }
  
   ngOnInit() {
-    this.getBookedTours()
-    this.getTours();
-    
-    const userID = this.route.snapshot.paramMap.get('userID');
-
-    if (userID) {
-      this.authService.getUserDetails(userID).subscribe(
+ 
+    if (this.authService.isLoggedIn()) {
+     
+      this.authService.getUserDetails().subscribe(
         (userDetails) => {
           this.userDetails = userDetails;
+          this.userID = userDetails.userID;
+          this.getTours();
+          this.getBookedTours();
         },
         (error) => {
-          console.error('Error fetching user details:', error);
+          console.error('Error getting user details:', error);
         }
       );
-    } else {
-      console.error('userID is null.');
     }
   }
   
- 
   getTours() {
     this.tourService.getTours().subscribe(
       (response) => {
@@ -74,22 +76,50 @@ export class UserComponent implements OnInit{
     );
   }
 
-  bookTour(){
-    
-    this.bookTourService.bookTour(this.userID, this.tourID).subscribe(
+  // selectTour(tourID: string) {
+  //   this.selectedTourID = tourID;
+
+  // }
+
+  bookTour(tourID:string) {
+    console.log('Before Book Tour:', this.tourID);
+    this.selectedTourID = tourID;
+    if (this.selectedTourID) {
+    this.bookTourService.bookTour(this.selectedTourID).subscribe(
       (response) => {
         console.log('Tour booked successfully:', response);
+        
       },
       (error) => {
         console.error('Error booking tour:', error);
+        // Handle error, e.g., display error message
       }
     );
-   }
+    }else {
+      console.warn('No tour selected.');
+    }
+    console.log('After Book Tour:', this.selectedTourID);
+  }
+  // bookTour() {
+  //     this.bookTourService.bookTour(this.tourID_,this.userID).subscribe(
+  //       (response) => {
+  //         console.log('Tour booked successfully:', response);
+  //         this.getBookedTours();
+  //       },
+  //       (error) => {
+  //         console.error('Error booking tour:', error);
+  //       }
+  //     );
+   
+  // }
 
    getBookedTours() {
     this.bookTourService.getBookedTours(this.userID).subscribe(
       (response) => {
         this.bookedTours = response;
+        let bookedTours=this.bookedTours
+        console.log(bookedTours[0]);
+        
       },
       (error) => {
         console.error('Error fetching booked tours:', error);

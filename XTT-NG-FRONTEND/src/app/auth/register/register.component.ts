@@ -19,10 +19,21 @@ export class RegisterComponent {
     }
     )
   }
+
+  getErrorMessage(controlName: string) {
+    const control = this.registrationForm.get(controlName);
+    return control?.hasError('required') ? 'This field is required' :
+      control?.hasError('email') ? 'Not a valid email' :
+        '';
+  }
   registerUser(){
-    let registeredUser=this.registrationForm.value
-    this.authService.registerUser(registeredUser);
-    this.router.navigate(['login'])
+    if (this.registrationForm.valid) {
+      let registeredUser = this.registrationForm.value;
+      this.authService.registerUser(registeredUser);
+      this.router.navigate(['login']);
+    } else {
+      this.registrationForm.markAllAsTouched();
+    }
   }
 
 }

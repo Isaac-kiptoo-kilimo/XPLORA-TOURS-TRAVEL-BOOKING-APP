@@ -22,12 +22,15 @@ export const verifyToken = (req:ExtendedUser, res:Response, next:NextFunction) =
         const data = jwt.verify(token, process.env.SECRET as string) as User
 
         req.info = data
+        console.log('Token verified. User details:', data);
 
-        console.log('This is the req.info detaisl',data);
+        // console.log('This is the req.info detaisl',data);
         
         
     } catch (error) {
+        console.error('Token verification failed. Error:', error);
         return res.json({
+            
             message: error
         })
     }

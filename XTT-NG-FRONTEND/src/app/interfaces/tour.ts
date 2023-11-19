@@ -13,7 +13,8 @@ export interface Tour {
 
 export interface TourBooking extends Tour {
     bookingID:string,
-    userId: string;
-    tourId: string;
+    userID: string;
+    tourID: string;
+    selectedID:string;
     bookingDate: string,
   }

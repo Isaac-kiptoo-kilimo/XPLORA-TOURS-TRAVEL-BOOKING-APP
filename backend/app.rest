@@ -14,8 +14,8 @@ POST http://localhost:4500/users/login/
 Content-Type: application/json
 
 {
-   "email": "isaackilimok2@gmail.com",
-   "password": "12345678@Ik" 
+   "email": "daniel@gmail.com",
+   "password": "12345678@Dk" 
 }
 
 ### fetching all users
@@ -38,8 +38,8 @@ token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJmOTlhYzVlZS1jOWRhLTR
 
 
 ### fetching user
-GET http://localhost:4500/users/details/f99ac5ee-c9da-4f7c-b719-62ae36f5b6b5/
-token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJmOTlhYzVlZS1jOWRhLTRmN2MtYjcxOS02MmFlMzZmNWI2YjUiLCJmdWxsTmFtZSI6IklzYWFjIEtpbGltbyIsImVtYWlsIjoiaXNhYWNraWxpbW9rMkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MDAyOTYwODIsImV4cCI6MTcwMDQ2ODg4Mn0.jK91lrBPSp7dR9tzAWmAqFJ5-hw2CZiBMAqz0C6MB8g
+GET http://localhost:4500/users/details/
+token:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJlYjFmMzJmMC1hNWU5LTRiODktOTQzMS1iNjEzNzRlMzM0MzIiLCJmdWxsTmFtZSI6IkRhbmllbCBLaXRoZWthIiwiZW1haWwiOiJkYW5pZWxAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MDAzNzA5MzYsImV4cCI6MTcwMDU0MzczNn0.SQsvo2KajTcz6AhCntxMKjKh6eRDZM8w6uj3c0D_HGc
 
 
 ### checking user details
@@ -94,18 +94,19 @@ POST http://localhost:4500/tours/book/
 Content-Type: application/json
 
 {
-    "userID": "e89cd53c-df5e-4ed4-a98a-9db4c7f9ced6",
-    "tourID": "3d5d6c71-77c8-49b2-8f8e-38f0b5a79fec"
-
+    "tourID": "3d5d6c71-77c8-49b2-8f8e-38f0b5a79fec",
+    "userID":"eb1f32f0-a5e9-4b89-9431-b61374e33432"
 }
 
+
+
 ### fetching booked tour
-GET http://localhost:4500/tours/bookedTours/e89cd53c-df5e-4ed4-a98a-9db4c7f9ced6/
+GET http://localhost:4500/tours/bookedTours/eb1f32f0-a5e9-4b89-9431-b61374e33432/
 
 
 # Deleting a tour
 ###
-DELETE http://localhost:4500/tours/c022d8bb-3443-4e12-b0a3-a62db6e53423/
+DELETE http://localhost:4500/tours/2bd4bb82-7f07-443f-b6d5-0a7659236541/
 
 
 ### create reviews

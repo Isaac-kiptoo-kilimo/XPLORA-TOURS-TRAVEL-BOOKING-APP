@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { BookTourService } from '../services/book-tour.service';
+import { User } from '../interfaces/user';
+import { Tour } from '../interfaces/tour';
 
 @Component({
   selector: 'app-book-tour',
@@ -7,19 +9,21 @@ import { BookTourService } from '../services/book-tour.service';
   styleUrls: ['./book-tour.component.css']
 })
 export class BookTourComponent {
+
+  userID!: string 
+  tourID!: string 
+
  constructor(private bookTourService:BookTourService){}
 
- bookTour(){
-  const userID = 'e89cd53c-df5e-4ed4-a98a-9db4c7f9ced6';
-  const tourID = '3d5d6c71-77c8-49b2-8f8e-38f0b5a79fec';
+//  bookTour() {
+//   this.bookTourService.bookTour(this.tourID).subscribe(
+//     (response) => {
+//       console.log('Tour booked successfully:', response);
+//     },
+//     (error) => {
+//       console.error('Error booking tour:', error);
+//     }
+//   );
+// }
 
-  this.bookTourService.bookTour(userID, tourID).subscribe(
-    (response) => {
-      console.log('Tour booked successfully:', response);
-    },
-    (error) => {
-      console.error('Error booking tour:', error);
-    }
-  );
- }
 }

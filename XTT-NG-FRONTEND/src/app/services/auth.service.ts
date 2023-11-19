@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User,LoginResponse, userLogin } from '../interfaces/user';
+import { User,LoginResponse, userLogin, UserDetails } from '../interfaces/user';
 import { Observable, tap } from 'rxjs';
 
 
@@ -54,23 +54,36 @@ export class AuthService {
   //   return data
   // }
 
+  getUserDetails(): Observable<UserDetails> {
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'token': token
+    });
 
-  getUserDetails(userID: string): Observable<any> {
-  
-    const token = localStorage.getItem('token');
-
-    
-    const headers = token ? new HttpHeaders().set('Authorization', `Bearer ${token}`) : undefined;
-
-    
-    return this.http.get(`${this.apiUrl}/details/${userID}`, { headers });
+    return this.http.get<UserDetails>('http://localhost:4500/users/details/', { headers });
   }
 
+  // getUserDetails(): Observable<any> {
+  
+  //   const token = localStorage.getItem('token');
+
+  //   console.log(token);
+    
+  //   // const headers = token ? new HttpHeaders().set('Authorization', `Bearer ${token}`) : undefined;
+
+    
+  //   return this.http.get<any>('http://localhost:4500/users/details/', token);
+  // }
+
   isLoggedIn(): boolean {
-    // Check if there is a token in local storage
+   
     return !!localStorage.getItem('token');
   }
   
+
+
+
   // getUserDetails(): Observable<UserDetails> {
   //   // Get the token from local storage
   //   const token = localStorage.getItem('token');

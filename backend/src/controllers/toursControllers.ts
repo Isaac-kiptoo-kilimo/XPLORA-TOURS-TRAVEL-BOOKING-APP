@@ -5,6 +5,7 @@ import { dbConfig } from '../config/db'
 import mssql from 'mssql'
 import { Tour } from '../types/interfaces'
 import { validateCreateTour, validateUpdateTour } from '../validators/validators'
+import { ExtendedUser } from '../middlewares/verifyToken'
 
 const dbhelpers=new Connection
 
@@ -139,35 +140,38 @@ export const deleteTourController=async(req:Request,res:Response)=>{
     }
 }
 
-export const bookTourController= async(req:Request,res:Response)=>{
-    try{
-        const {userID,tourID}=req.body;
-        const bookingID=v4()
-        console.log(userID);
-        
-
-        const result=await dbhelpers.execute('bookingTour',{userID,tourID,bookingID})
-        console.log(result);
-        
-        if (result.rowsAffected[0] === 1) {
-            return res.status(200).json({message:'Tour booked successfully'});
+export const bookTourController= async(req:ExtendedUser,res:Response)=>{
+    try {
+      if (req.info && typeof req.info.userID === 'string') {
+          const { tourID } = req.body;
+          console.log('new tourid'+tourID);
+          
+          const { userID } = req.info;
+          const bookingID = v4();
+          const result = await dbhelpers.execute('bookingTour', { userID, tourID, bookingID });
+    
+          if (result.rowsAffected[0] === 1) {
+            return res.status(200).json({ message: 'Tour booked successfully' });
           } else {
-            return res.status(404).json({message:'User not found'});
+            return res.status(404).json({ message: 'User not found' });
           }
-
-    }catch(error){
-        console.error('Error booking tour', error);        
+        } else {
+          return res.status(401).json({ message: 'User information not available or invalid' });
+      }
+     
+      } catch (error) {
+        console.error('Error booking tour', error);
         return res.status(500).json({
-            message:"Internal Server Error"
-        })
-    }
+          message: 'Internal Server Error',
+        });
+      }
 }
 
 export const getBookedToursControllers= async(req:Request,res:Response)=>{
     try{
         const {userID}=req.params;
         const results=await dbhelpers.execute('getBookedTours',{userID})
-        console.log('getting booked tours successfully');
+        // console.log('getting booked tours successfully');
         
         return res.status(200).json(results.recordset);
         
