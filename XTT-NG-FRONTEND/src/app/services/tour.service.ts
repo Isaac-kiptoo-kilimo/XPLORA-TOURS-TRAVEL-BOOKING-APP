@@ -21,6 +21,31 @@ export class TourService {
     });
   }
 
+
+  updateTourById(tourID: string, updatedTour: Tour): Observable<any> {
+    return this.http.put(`http://localhost:4500/tours/update/${tourID}`, updatedTour);
+  }
+  
+
+  // updateUserById(updatedTour:Tour): Observable<any> {
+  //   return this.authService.getUserDetails().pipe(
+  //     switchMap((user) => {
+  //       console.log(user.userID);
+  //       let userID=user.userID
+        
+  
+  //       const url = `http://localhost:4500/users/updateUser/${userID}`;
+  
+  //       const headers = new HttpHeaders({
+  //         'Content-Type': 'application/json',
+  //         'token': token,
+  //       });
+  
+  //       return this.http.put(url, updatedUser, { headers });
+  //     })
+  //   );
+  // }
+
   deleteTour(tourID: string): Observable<any> {
     return this.http.delete(`http://localhost:4500/tours/${tourID}`)
    

@@ -12,17 +12,23 @@
   color: white;
   width: 80%;
   border-radius: 30px 0 30px 0;
+  background-color: #736B02;
+  z-index: 20;
 }
 .bg-banner h3{
   border: 1px solid white;
   padding: 10px;
+}
+
+.about-line{
+  background-color: #736B02;
 }
 /* .size-card{
   width: 200px!important;
 } */
 
 .wave-top,.wave-bot{
-  background: linear-gradient(90deg, #0c4b9e, #08bd88, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(90deg, #736B09 0%, #daae51 100%);
 }
 
 
@@ -38,12 +44,16 @@
     font-family: "Poppins", sans-serif;
   }
   
+
+ 
   
   /*header section*/
   .hero_area {
     position: relative;
-    background: -webkit-gradient(linear, left top, left bottom, from(#0c4b9e), color-stop(#08bd88), to(rgba(0, 0, 0, 0)));
-    background: linear-gradient(to bottom, #0c4b9e, #08bd88, rgba(0, 0, 0, 0));
+    background-image: url(https://vogueadventures.com/wp-content/uploads/samburu.jpg);
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: cover;
   }
   
   
@@ -183,6 +193,9 @@
     width: 20px;
     margin-left: 3px;
   }
+
+ 
+  
   
   /* .slider_section .img-box .play_btn::before {
     content: "";
@@ -401,9 +414,9 @@
     margin-top: 10px;
   }
   
-  .package_section {
+  /* .package_section {
     text-align: center;
-  }
+  } */
   
   .package_section .heading_container {
     -webkit-box-pack: center;

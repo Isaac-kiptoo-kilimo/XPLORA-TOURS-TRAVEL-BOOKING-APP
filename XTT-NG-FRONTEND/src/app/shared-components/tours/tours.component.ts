@@ -13,16 +13,48 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./tours.component.css']
 })
 export class ToursComponent {
-
+  visible = true;
+  loggedIn: boolean = false;
 
   tours!: Tour[];
   users!: User[];
   // visible = true
+
+  updateTourForm!: FormGroup
+ 
  
 
-  constructor(private tourService: TourService, private router: Router, private userService:UsersService,private cdr: ChangeDetectorRef ){
+  constructor(private tourService: TourService, private router: Router, private userService:UsersService,private cdr: ChangeDetectorRef , private formBuilder:FormBuilder ){
+    this.updateTourForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      destination: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      type: ['', [Validators.required]],
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]]
+    });
 
   }
+ 
+  // updateTour(){
+  //   let updatedTour: Tour = this.updateTourForm.value;
+  //   // updatedUser.userID = this.userID
+  //      console.log(updatedUser);
+       
+  //      this.tourService.updateTourById(tourID, updatedTour)subscribe(
+  //     (response) => {
+  //       console.log(response);
+        
+  //       console.log('Tour updated successfully', response);
+  //       this.updateTourForm.reset();
+  //       // this.isFormVisible = false;
+  //     },
+  //     (error) => {
+  //       console.error('Error updating user', error);
+  //     }
+  //   );
+  // }
 
   ngOnInit() {
     this.getTours();
@@ -31,12 +63,12 @@ export class ToursComponent {
   }
 
 
-
   getTours() {
     this.tourService.getTours().subscribe(
       (response) => {
         this.tours = response;
         this.cdr.detectChanges()
+        this.loadTours
       },
       (error) => {
         console.error('Error fetching tours:', error);
@@ -83,6 +115,12 @@ export class ToursComponent {
     );
   }
 
+
+  logout() {
+    this.router.navigate(['']);
+    localStorage.clear();
+    this.loggedIn = false;
+  }
 
 }
 

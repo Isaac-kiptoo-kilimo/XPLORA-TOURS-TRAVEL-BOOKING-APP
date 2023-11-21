@@ -6,10 +6,13 @@ CREATE TABLE Tours(
     price INT NOT NULL,
     type VARCHAR(200) NOT NULL,
     startDate VARCHAR(200) NOT NULL,
-    endDate VARCHAR(100),
-    duration VARCHAR (100)
+    endDate VARCHAR(100)
+    
 );
 
 SELECT * FROM Tours;
+
+ALTER TABLE Tours 
+DROP COLUMN duration
 
 DROP table Tours

@@ -6,11 +6,12 @@ CREATE OR ALTER PROCEDURE createTours(
       @price INT,
       @type VARCHAR(200),
       @startDate VARCHAR(200), 
-      @endDate VARCHAR(200),
-      @duration VARCHAR (100)
+      @endDate VARCHAR(200)
+     
 )
 AS BEGIN
-    INSERT INTO Tours(tourID,name,description,destination,price,type,startDate,endDate,duration)
-     VALUES(@tourID,@name,@description,@destination,@price,@type,@startDate,@endDate,@duration )
+    INSERT INTO Tours(tourID,name,description,destination,price,type,startDate,endDate)
+     VALUES(@tourID,@name,@description,@destination,@price,@type,@startDate,@endDate)
 
 END
+

@@ -1,10 +1,13 @@
 <div class="min-h-full">
+  
   <app-navbar></app-navbar>
-    <header class="bg-white shadow">
+  <div class="bg-cover bg-center bg-fixed" style="background-image: url('../../assets/images/background-color.jpg')">
+    <header class=" shadow">
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
+        <h1 class="text-3xl font-bold tracking-tight text-white">Dashboard</h1>
       </div>
     </header>
+  </div>
     <main>
       <div class="mx-auto flex justify-between max-w-7xl py-6 sm:px-6 lg:px-8">
         <div>
@@ -83,10 +86,10 @@
                               <input type="date" formControlName="endDate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
                               <div *ngIf="createTourForm.get('endDate')?.hasError('endDateInvalid')" class="text-red-500">End date should be greater than start date</div>
                           </div>
-                          <div class="col-span-2">
+                          <!-- <div class="col-span-2">
                             <label for="duration" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Duration</label>
                             <input type="text" formControlName="duration" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="duration" required="">
-                        </div>
+                        </div> -->
                           </div>
                           <button type="submit"  class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                               <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
@@ -104,9 +107,44 @@
       </div>
     </div>
   </div>
-  <app-tours></app-tours>
+  <div class="flex w-full ">
+    <div class="tours ">
+      <app-tours></app-tours>
+    </div>
+   
+    <div class="flex gap-4 mr-5 flex-col md:flex-row">
+
+      <div class="main-content gap-4  flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5">
+          <div class="flex gap-4  ">
+     
+              <div class="w-full flex flex-col  gap-4 ">
+                  <!--Metric Card-->
+                  <div class="  from-indigo-200 to-indigo-100 border-b-4 border-indigo-500 rounded-lg shadow-xl p-5" *ngFor="let user of users">
+                      <div class="flex flex-row items-center">
+                          <div class="flex-shrink pr-4">
+                              <div class="rounded-full p-5 bg-indigo-600"><i class="fas fa-tasks fa-2x fa-inverse"></i></div>
+                          </div>
+                          <div class="flex-1 text-right md:text-center">
+
+                              <h3 class="font-bold text-3xl"><p>{{user.fullName}}</p></h3>
+                          </div>
+                          <div class="py-6 px-15 border-t sm:px-5 dark:border-gray-700 flex justify-between ">
+                            <i class="fa-regular fa-trash-can fa-xl"   style="color: #f54324;" (click)="deleteUser(user.userID)" ></i>
+                         
+                           </div>
+                           <!-- deleteUser -->
+                      </div>
+                  </div>
+                
+              </div>
+         
+          </div>
+      </div>
+  </div>
+  </div>
 
 
+  <app-footer></app-footer>
 
 
   

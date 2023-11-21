@@ -5,9 +5,9 @@ export interface Tour {
     destination:string,
     price: number;
     type:string,
-    startDate:string,
-    endDate:string,
-    duration:string
+    startDate: number,
+    endDate: number,
+    duration: number
 }
 
 

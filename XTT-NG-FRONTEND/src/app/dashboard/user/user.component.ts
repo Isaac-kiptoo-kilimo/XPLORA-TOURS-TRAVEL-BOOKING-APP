@@ -26,6 +26,7 @@ export class UserComponent implements OnInit{
   bookedTours: TourBooking[] = [];
   userID! : string;
   selectedTourID!: string ;
+  filter=''
   // selectedTourID: string = '3d5d6c71-77c8-49b2-8f8e-38f0b5a79fec'
 
   

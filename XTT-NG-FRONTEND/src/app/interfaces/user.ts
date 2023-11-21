@@ -22,9 +22,15 @@ export interface LoginResponse {
 
 
 export interface UserDetails {
-  userID:string
+  userID:string;
   fullName: string;
   email: string;
-  role:string
+  role:string;
   // Add other user details as needed
 }
+
+export interface updatedUserData {
+  userID:string,
+  fullName: string,
+  email: string,
+};

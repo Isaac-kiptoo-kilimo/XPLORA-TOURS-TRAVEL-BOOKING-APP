@@ -49,8 +49,7 @@ export const validateCreateTour=Joi.object({
     price:Joi.number().required(),
     type:Joi.string().required(),
     startDate:Joi.string().required(),
-    endDate:Joi.string().required(),
-    duration:Joi.string().required()
+    endDate:Joi.string().required()
 })
 
 // updating tours validators

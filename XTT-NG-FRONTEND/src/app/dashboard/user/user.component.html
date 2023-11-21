@@ -2,18 +2,27 @@
 <app-navbar></app-navbar>
 
 
-<div class="min-h-full">
-   
-    <div *ngIf="userDetails">
-        <h2>Welcome, {{ userDetails.fullName }}!</h2>
-        <p>Your Role: {{ userDetails.role }}</p>
-      
+<div class="min-h-full overflow-hidden">
+  <div class="bg-cover bg-center mb-2 bg-fixed" style="background-image: url('../../assets/images/background-color.jpg')">
+    <header class=" shadow">
+      <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <div *ngIf="userDetails">
+          <h2>!</h2>
+          <h1 class="text-3xl font-bold tracking-tight text-white">Welcome, {{ userDetails.fullName }} User Dashboard</h1>
+                  
+        </div>
+        
       </div>
+    </header>
+  </div>
+
+    
                
-      <form [formGroup]="searchForm" (ngSubmit)="searchTours()" class="flex w-ful items-center">   
+     <div class="mx-6 px-10 w-full justify-between flex">
+       <form [formGroup]="searchForm" (ngSubmit)="searchTours()" class="flex w-3/4  items-center">   
         <label for="simple-search" class="sr-only">Search</label>
-        <div class="relative w-full">
-             <input formControlName="type" type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search branch name..." required>
+        <div class="relative   w-3/4 ">
+             <input formControlName="type" type="text" id="simple-search" class="bg-gray-50 border  border-gray-300 py-3 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Tour Type..." required>
        </div>
           <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -22,49 +31,55 @@
           <span class="sr-only">Search</span>
          </button>
       </form>
+      <div>
+        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" (click)="visible = !visible">Booked Tours</button>
+    </div>
+     </div>
+     
       <section class=" border-b  py-8">
         <div class="container flex  flex-wrap gap-8 mx-5 px-5 pt-4 pb-12">
           <div *ngFor="let tour of tours " class= " flex flex-col flex-shrink">
          <div class="bg-white grid ">
           <img src="assets/images/maasai2.jpeg" class="w-full" alt="Image Description">
           <div class="p-4 flex-1 md:p-5">
-            <h3 class="text-lg font-bold text-gray-800 dark:text-white">
+            <h3 class="text-lg text-center text-blue-800 font-bold text-gray-800 dark:text-white">
               {{tour.name}}
             </h3>
             <h3 class="text-lg font-bold text-gray-800 dark:text-white">
               Final Destination : {{tour.destination}}
             </h3>
-            <p class="mt-1 text-gray-500 dark:text-gray-400">
+            <p class=" my-4 text-gray-500 dark:text-gray-400">
               {{tour.type}}
             </p>
-            <p class="mt-1 text-gray-500 dark:text-gray-400">
+            <p class="mt-1 flex gap-6 my-3 text-gray-500 dark:text-gray-400">
               Total Cost : <span class="text-lg font-bold text-gray-800 dark:text-white"> KSH {{tour.price}}</span>
             </p>
-            <p class="mt-1 text-gray-500 dark:text-gray-400">
+            <!-- <p class="mt-1 text-gray-500 dark:text-gray-400">
               {{tour.description}}
-            </p>
-            <div class="flex justify-between">
-              <p class="text-xs text-gray-500 dark:text-gray-500">
-                Start Date : {{tour.startDate}}
+            </p> -->
+            <div class=" my-4 justify-between">
+              <p class="text-xl flex gap-4 my-2 text-gray-500 dark:text-gray-500">
+                Start Date : <span class="text-gray-900 font-bold
+                "> {{tour.startDate}} </span>
               </p>
-              <p class="text-xs text-gray-500 dark:text-gray-500">
-                End Date : {{tour.endDate}} 
+              <p class="text-xl flex gap-5 text-gray-500 dark:text-gray-500">
+                End Date : <span class="text-gray-900 font-bold
+                "> {{tour.endDate}} </span>
               </p>
              
             </div>
-            <p class="text-xl text-gray-500 dark:text-gray-500">
+            <p class="text-xl my-2 flex gap-6 text-gray-500 dark:text-gray-500">
               Tickets Remaining : {{tour.duration}} 
             </p>
-            <div class="p-1 flex justify-between border-t sm:px-5 dark:border-gray-700">
+            <div class=" flex justify-between border-t  my-3 dark:border-gray-700">
           
-              <p class="text-xl text-gray-500 dark:text-gray-500">
+              <p class="text-xl text-gray-500 my-2 dark:text-gray-500">
                 Duration : {{tour.duration}} Days
               </p>
              
-              <button type="button" (click)="bookTour(tour.tourID)" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Book</button>
+              <button type="button" (click)="bookTour(tour.tourID)" class="my-2 text-white bg-blue-800  focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Book</button>
       
             </div>
-            
            
           </div>
          </div>
@@ -73,80 +88,109 @@
         
         </div>
       </section>
-
-      <!-- <section>
-        <h2>The booked Tours</h2>
-        <div class="getBookedTour">
-          <div *ngFor="let tour of bookedTours">
-            {{ tour.name}} - {{ tour.bookingDate }}
-          </div>
-        </div>
-      </section> -->
-
-      <section class=" border-b  py-8">
-        <h2>The booked Tours</h2>
-        <div class="container flex  flex-wrap gap-8 mx-5 px-5 pt-4 pb-12">
-          <div *ngFor="let tour of bookedTours " class= " flex flex-col flex-shrink">
-         <div class="bg-white grid ">
-          <img src="assets/images/maasai2.jpeg" class="w-full" alt="Image Description">
-          <div class="p-4 flex-1 md:p-5">
-            <h3 class="text-lg font-bold text-gray-800 dark:text-white">
-              {{tour.name}}
-            </h3>
-            <h3 class="text-lg font-bold text-gray-800 dark:text-white">
-              Final Destination : {{tour.destination}}
-            </h3>
-            <p class="mt-1 text-gray-500 dark:text-gray-400">
-              {{tour.type}}
-            </p>
-            <p class="mt-1 text-gray-500 dark:text-gray-400">
-              Total Cost : <span class="text-lg font-bold text-gray-800 dark:text-white"> KSH {{tour.price}}</span>
-            </p>
-            <p class="mt-1 text-gray-500 dark:text-gray-400">
-              {{tour.description}}
-            </p>
-            <div class="flex justify-between">
-              <p class="text-xs text-gray-500 dark:text-gray-500">
-                Start Date : {{tour.startDate}}
-              </p>
-              <p class="text-xs text-gray-500 dark:text-gray-500">
-                End Date : {{tour.endDate}} 
-              </p>
-             
-            </div>
-            <p class="text-xl text-gray-500 dark:text-gray-500">
-              Tickets Remaining : {{tour.duration}} 
-            </p>
-            <div class="p-1 flex justify-between border-t sm:px-5 dark:border-gray-700">
-          
-              <p class="text-xl text-gray-500 dark:text-gray-500">
-                Duration : {{tour.duration}} Days
-              </p>
-
-             
-            </div>
-            <hr>
-          <div class="add-review pt-4">
-            <div class="review-output">
-              <p>The tour was so wow</p>
-            </div>
-            <div class="comment-input py-4">
-              <form class="flex gap-8" >
-                <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-ful p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Add Review">
-                <button type="submit" class="post text-blue-500">Post</button>
-              </form>
-            </div> 
-          </div>   
-           
-          </div>
-         </div>
-          </div>
-        
-        
-        </div>
-      </section>
-
     
+    
+
+      <div *ngIf = "!visible" class="relative z-10 h-full" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+  
+        <div  class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+      
+        <div class="fixed inset-0 overflow-hidden">
+          <div class="absolute inset-0 overflow-hidden">
+            <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+          
+              <div class="pointer-events-auto relative w-screen max-w-md">
+             
+                <div class="absolute left-0 top-0 -ml-8 flex pr-2 pt-4 sm:-ml-10 sm:pr-4">
+                  <button (click)="visible=!visible" type="button" class="relative rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
+                    <span class="absolute -inset-2.5"></span>
+                    <span class="sr-only">Close panel</span>
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+      
+                <div class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+                  <div class="px-4 sm:px-6">
+                    <h2 class="text-base font-semibold leading-6 text-gray-900" id="slide-over-title">CREATE TOUR & DESTINATION</h2>
+                  </div>
+                  <div class="relative mt-6 flex-1 px-4 sm:px-6">
+                    <div class="relative p-4 w-full max-w-md max-h-full">
+                      <!-- Modal content -->
+                      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                      
+                        <section class=" border-b  py-8">
+                          <h1 class="text-3xl text-center text-bold">Booked Tours</h1>
+                          <div class="container flex  flex-wrap gap-8 mx-5 px-5 pt-4 pb-12">
+                            <div *ngFor="let tour of bookedTours  " class= " flex flex-col flex-shrink">
+                           <div class="bg-white grid ">
+                            <img src="assets/images/maasai2.jpeg" class="w-full" alt="Image Description">
+                            <div class="p-4 flex-1 md:p-5">
+                              <h3 class="text-lg text-center text-blue-800 font-bold text-gray-800 dark:text-white">
+                                {{tour.name}}
+                              </h3>
+                              <h3 class="text-lg font-bold text-gray-800 dark:text-white">
+                                Final Destination : {{tour.destination}}
+                              </h3>
+                              <p class=" my-4 text-gray-500 dark:text-gray-400">
+                                {{tour.type}}
+                              </p>
+                              <p class="mt-1 flex gap-6 my-3 text-gray-500 dark:text-gray-400">
+                                Total Cost : <span class="text-lg font-bold text-gray-800 dark:text-white"> KSH {{tour.price}}</span>
+                              </p>
+                              <div class=" my-4 justify-between">
+                                <p class="text-xl flex gap-4 my-2 text-gray-500 dark:text-gray-500">
+                                  Start Date : <span class="text-gray-900 font-bold
+                                  "> {{tour.startDate}} </span>
+                                </p>
+                                <p class="text-xl flex gap-5 text-gray-500 dark:text-gray-500">
+                                  End Date : <span class="text-gray-900 font-bold
+                                  "> {{tour.endDate}} </span>
+                                </p>
+                               
+                              </div>
+                              <p class="text-xl my-2 flex gap-6 text-gray-500 dark:text-gray-500">
+                                Tickets Remaining : {{tour.duration}} 
+                              </p>
+                              <div class=" flex justify-between border-t  my-3 dark:border-gray-700">
+                            
+                                <p class="text-xl text-gray-500 my-2 dark:text-gray-500">
+                                  Duration : {{tour.duration}} Days
+                                </p>
+                        
+                              </div>
+                              <hr>
+                              <div class="add-review pt-4">
+                                <div class="review-output">
+                                  <p>The tour was so wow</p>
+                                </div>
+                                <div class="comment-input py-4">
+                                  <form class="flex gap-8" >
+                                    <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-ful p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Add Review">
+                                    <button type="submit" class="post text-blue-500">Post</button>
+                                  </form>
+                                </div> 
+                              </div>
+                             
+                            </div>
+                           </div>
+                            </div>
+                          
+                          
+                          </div>
+                        </section>
+                      </div>
+                  </div>
+                  </div>
+                  
+                  <!-- <app-tours></app-tours> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     
 </div>
- 
+ <app-footer></app-footer>

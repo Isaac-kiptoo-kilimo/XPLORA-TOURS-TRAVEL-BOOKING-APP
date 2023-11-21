@@ -14,6 +14,10 @@ import { ToursComponent } from './shared-components/tours/tours.component'
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { BannerComponent } from './banner/banner.component';
+import { PdateUserComponent } from './pdate-user/pdate-user.component';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,10 @@ import { HttpClientModule } from '@angular/common/http';
     UserComponent,
     ToursComponent,
     NotFoundComponent,
+    ForgotpasswordComponent,
+    BannerComponent,
+    PdateUserComponent,
+    SearchPipe,
 
   ],
   imports: [

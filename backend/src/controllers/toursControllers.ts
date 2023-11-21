@@ -13,15 +13,17 @@ const dbhelpers=new Connection
 
 export const createTourController= async(req:Request,res:Response)=>{
    
-   try{ const {name,description,destination,price,type,startDate,endDate,duration}=req.body;
+   try{ const {name,description,destination,price,type,startDate,endDate}=req.body;
 
     const tourID=v4()
 
     const {error}=validateCreateTour.validate(req.body)
+    console.log(error);
+    
     if (error)
         return res.status(403).json({ message: "Enter correct details" });
   
-    const tour=await dbhelpers.execute('createTours',{ tourID, name,description,destination,price,type,startDate,endDate,duration})
+    const tour=await dbhelpers.execute('createTours',{ tourID, name,description,destination,price,type,startDate,endDate})
   
     
     return res.status(201).json({

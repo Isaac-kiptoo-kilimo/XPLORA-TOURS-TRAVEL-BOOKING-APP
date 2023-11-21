@@ -1,3 +1,11 @@
 .space-y-1{
     display: none !important;
 }
+
+.tours{
+    width: 1200px;
+}
+
+.user{
+    width: 300px;
+}

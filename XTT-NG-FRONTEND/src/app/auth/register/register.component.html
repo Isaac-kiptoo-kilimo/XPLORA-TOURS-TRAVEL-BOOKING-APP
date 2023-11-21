@@ -1,5 +1,9 @@
 <app-navbar></app-navbar>
-<section class="flex flex-col items-center pt-6">
+<div class="bg-cover bg-center bg-fixed" style="background-image: url('../../assets/images/background-color.jpg')">
+<section class="flex items-center py-6">
+  <div class="img">
+    <img src="assets/images/login.png" alt="">
+  </div>
     <div
       class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
       <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -24,7 +28,7 @@
             <div *ngIf="registrationForm.get('password')?.touched && registrationForm.get('password')?.hasError('required')" class="text-red-500">Password is required</div>
 
           </div>
-          <button type="submit" class="w-full text-white bg-blue-900 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create an account</button>
+          <button type="submit" class="w-full text-white auth-btn focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create an account</button>
           <p class="text-sm font-light text-gray-500 dark:text-gray-400">Already have an account? <a
               class="font-medium text-blue-900 hover:underline dark:text-blue-500" href="/signin">Sign in here</a>
           </p>
@@ -32,5 +36,5 @@
       </div>
     </div>
   </section>
-
-  
+</div>
+  <app-footer></app-footer>

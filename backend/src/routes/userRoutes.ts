@@ -10,7 +10,7 @@ userRouter.post('/',()=>{
 });
 userRouter.post('/register', registerUserController);
 userRouter.post('/login', loginUserController);
-userRouter.post('/updateUser/:userID', updateUserController);
+userRouter.put('/updateUser/:userID', updateUserController);
 userRouter.get('/',verifyToken,getAllUsersControllers);
 userRouter.get('/details',verifyToken, getUserDetails);
 userRouter.get('/checkUserDetails', verifyToken, checkCredentials);
