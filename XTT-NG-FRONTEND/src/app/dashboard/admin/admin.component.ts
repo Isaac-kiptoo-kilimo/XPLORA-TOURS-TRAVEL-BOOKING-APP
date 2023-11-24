@@ -77,9 +77,9 @@ export class AdminComponent implements OnInit {
 //     control.get('duration')?.setValue(duration);
 //   }
 // }
-startDate!:number;
+// startDate!:number;
 
-endDate!:number;
+// endDate!:number;
 
   ngOnInit() {
     this.getTours();
@@ -87,29 +87,29 @@ endDate!:number;
 
 
 
-    this.createTourForm.get('startDate')?.valueChanges.subscribe(res=>{
-      this.startDate = new Date(this.createTourForm.get('startDate')?.value).getTime()
-      console.log(this.startDate);
-      const duration = Math.round((this.endDate - this.startDate) / (1000 * 60 * 60 * 24));
-      console.log(duration);
+//     this.createTourForm.get('startDate')?.valueChanges.subscribe(res=>{
+//       this.startDate = new Date(this.createTourForm.get('startDate')?.value).getTime()
+//       console.log(this.startDate);
+//       const duration = Math.round((this.endDate - this.startDate) / (1000 * 60 * 60 * 24));
+//       console.log(duration);
   
-      this.createTourForm.get('duration')?.setValue(duration);
-    })
+//       this.createTourForm.get('duration')?.setValue(duration);
+//     })
 
-    this.createTourForm.get('endDate')?.valueChanges.subscribe(res=>{
-      this.endDate = new Date(this.createTourForm.get('endDate')?.value).getTime()
-      console.log(this.endDate);
+//     this.createTourForm.get('endDate')?.valueChanges.subscribe(res=>{
+//       this.endDate = new Date(this.createTourForm.get('endDate')?.value).getTime()
+//       console.log(this.endDate);
 
-      const duration = Math.round((this.endDate - this.startDate) / (1000 * 60 * 60 * 24));
-      console.log(duration);
+//       const duration = Math.round((this.endDate - this.startDate) / (1000 * 60 * 60 * 24));
+//       console.log(duration);
   
-      this.createTourForm.get('duration')?.setValue(duration);
-    })
+//       this.createTourForm.get('duration')?.setValue(duration);
+//     })
 
    
 
     
-  }
+ }
 
   getTours() {
     this.tourService.getTours().subscribe(

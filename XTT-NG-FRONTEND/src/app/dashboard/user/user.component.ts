@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Tour, TourBooking } from 'src/app/interfaces/tour';
@@ -26,8 +26,8 @@ export class UserComponent implements OnInit{
   bookedTours: TourBooking[] = [];
   userID! : string;
   selectedTourID!: string ;
-  filter=''
-  // selectedTourID: string = '3d5d6c71-77c8-49b2-8f8e-38f0b5a79fec'
+ filter: string = '';
+
 
   
   tourID! : string;
@@ -78,10 +78,7 @@ export class UserComponent implements OnInit{
     );
   }
 
-  // selectTour(tourID: string) {
-  //   this.selectedTourID = tourID;
-
-  // }
+  
 
   bookTour(tourID:string) {
     console.log('Before Book Tour:', this.tourID);
@@ -102,18 +99,7 @@ export class UserComponent implements OnInit{
     }
     console.log('After Book Tour:', this.selectedTourID);
   }
-  // bookTour() {
-  //     this.bookTourService.bookTour(this.tourID_,this.userID).subscribe(
-  //       (response) => {
-  //         console.log('Tour booked successfully:', response);
-  //         this.getBookedTours();
-  //       },
-  //       (error) => {
-  //         console.error('Error booking tour:', error);
-  //       }
-  //     );
-   
-  // }
+
 
    getBookedTours() {
     this.bookTourService.getBookedTours(this.userID).subscribe(
@@ -129,14 +115,31 @@ export class UserComponent implements OnInit{
     );
   }
 
-  searchForm = this.formBuilder.group({
-    type: [''],
-  });
+  // searchForm = this.formBuilder.group({
+  //   type: [''],
+  // });
+
+
+  
+  // searchTours() {
+  //   const type = this.searchForm.value.type;
+  //   if (type) {
+  //     this.tourService.searchToursByType(type).subscribe(
+  //       (tours) => {
+  //         this.tours = tours;
+  //       },
+  //       (error) => {
+  //         console.error('Error fetching tours:', error);
+  //       }
+  //     );
+  //   } else {
+  //     this.getTours();
+  //   }
+  // }
 
   searchTours() {
-    const type = this.searchForm.value.type;
-    if (type) {
-      this.tourService.searchToursByType(type).subscribe(
+    if (this.filter) {
+      this.tourService.searchToursByType(this.filter).subscribe(
         (tours) => {
           this.tours = tours;
         },
@@ -145,6 +148,7 @@ export class UserComponent implements OnInit{
         }
       );
     } else {
+      this.tours = [];
       this.getTours();
     }
   }

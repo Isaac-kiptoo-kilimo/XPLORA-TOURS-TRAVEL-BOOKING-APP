@@ -22,8 +22,21 @@ export const createTourController= async(req:Request,res:Response)=>{
     
     if (error)
         return res.status(403).json({ message: "Enter correct details" });
-  
-    const tour=await dbhelpers.execute('createTours',{ tourID, name,description,destination,price,type,startDate,endDate})
+
+        const pool = await mssql.connect(dbConfig)
+
+        let result = await pool.request()
+        .input("tourID", mssql.VarChar, tourID) 
+        .input("name", mssql.VarChar, name)
+        .input("description", mssql.VarChar, description) 
+        .input("destination", mssql.VarChar, destination)
+        .input("price", mssql.Int, price)
+        .input("type", mssql.VarChar, type)
+        .input("startDate", mssql.Date, startDate)
+        .input("endDate", mssql.Date, endDate)
+        .execute('createTours')
+    
+    // const tour=await dbhelpers.execute('createTours',{ tourID, name,description,destination,price,type,startDate,endDate})
   
     
     return res.status(201).json({
@@ -58,13 +71,14 @@ export const  getSingleTourController=async (req:Request,res:Response)=>{
 
           const {tourID}=req.params;
 
-          console.log(tourID);
+          // console.log(tourID);
           if (!tourID) return res.status(400).send({ message: "Id is required" });
           const data = {
                 tourID: tourID,
               };
-              const tour = await dbhelpers.execute('getSingleTour', data);
-         return res.json(tour.recordset)
+              const tour = (await dbhelpers.execute('getSingleTour', data)).recordset;
+        //  return res.json({tour:tour})
+        return res.json({tour})
           
         
 
@@ -80,30 +94,49 @@ export const  getSingleTourController=async (req:Request,res:Response)=>{
 
 export const updateTourController = async (req: Request, res: Response) => {
     try {
-      const { name, description,destination,price,type,startDate,endDate,duration } = req.body;
+      const { name, description,destination,price,type,startDate,endDate } = req.body;
         const {tourID}=req.params
+        // console.log(tourID);
+        
       const { error } = validateUpdateTour.validate(req.body);
-      console.log(error);
+
+      // console.log(error);
       
-      if (error)
+      if (error){
         return res.status(403).json({ message: "Enter correct details" });
+      }
   
-      const newTour = {
-        tourID,
-        name,
-        description,
-        startDate,
-        destination,
-        price,
-        type,
-        endDate,
-        duration
-      };
+      // const newTour: Tour = {
+      //   tourID,
+      //   name,
+      //   description,
+      //   startDate,
+      //   destination,
+      //   price,
+      //   type,
+      //   endDate
+      // };
   
-  
-      let result=await dbhelpers.execute('updateTour', newTour);
+      const pool = await mssql.connect(dbConfig)
+
+      let result = await pool.request()
+      .input("tourID", mssql.VarChar, tourID) 
+      .input("name", mssql.VarChar, name)
+      .input("description", mssql.VarChar, description) 
+      .input("destination", mssql.VarChar, destination)
+      .input("price", mssql.Int, price)
+      .input("type", mssql.VarChar, type)
+      .input("startDate", mssql.Date, startDate)
+      .input("endDate", mssql.Date, endDate)
+      .execute('updateTour')
+      // let result=await dbhelpers.execute('updateTour', {tourID,
+      //   name,destination,price,type,description,startDate,endDate});
+      // console.log(result);
+      
   
       return res.status(201).json({ message: "Tour updated successfully" });
+
+
     } catch (error) {
       console.log(error);
       res.status(502).json({

@@ -43,7 +43,7 @@ export const validateUpdateuser=Joi.object({
 
 // create tours validation
 export const validateCreateTour=Joi.object({
-    name:Joi.string().required().min(5).max(30),
+    name:Joi.string().required().min(5).max(100),
     description:Joi.string().required().max(200),
     destination:Joi.string().required(),
     price:Joi.number().required(),
@@ -60,7 +60,6 @@ export const validateUpdateTour=Joi.object({
     price:Joi.number().required(),
     type:Joi.string().required(),
     startDate:Joi.string().required(),
-    endDate:Joi.string().required(),
-    duration:Joi.string().required()
+    endDate:Joi.string().required()
 })
 

@@ -18,6 +18,7 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { BannerComponent } from './banner/banner.component';
 import { PdateUserComponent } from './pdate-user/pdate-user.component';
 import { SearchPipe } from './search.pipe';
+import { TourlistComponent } from './tourlist/tourlist.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SearchPipe } from './search.pipe';
     BannerComponent,
     PdateUserComponent,
     SearchPipe,
+    TourlistComponent,
 
   ],
   imports: [

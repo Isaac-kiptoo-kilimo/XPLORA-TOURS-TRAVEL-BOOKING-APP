@@ -6,8 +6,7 @@ CREATE OR ALTER PROCEDURE updateTour(
       @price INT,
       @type VARCHAR(200),
       @startDate VARCHAR(200), 
-      @endDate VARCHAR(200),
-      @duration VARCHAR (100)
+      @endDate VARCHAR(200)
 )
 AS
 BEGIN
@@ -19,8 +18,7 @@ BEGIN
     price=@price,
     type=@type,
 	startDate=@startDate,
-    endDate=@endDate,
-    duration=@duration
+    endDate=@endDate
 	
 	WHERE tourID = @tourID ;
 END;

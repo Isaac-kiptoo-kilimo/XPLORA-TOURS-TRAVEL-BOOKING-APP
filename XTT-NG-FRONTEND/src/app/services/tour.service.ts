@@ -9,6 +9,7 @@ import { Tour } from '../interfaces/tour';
 export class TourService {
 
   constructor(private http: HttpClient) {}
+
   createTour(tour: Tour): Observable<any> {
     return this.http.post('http://localhost:4500/tours/create', tour);
   }
@@ -23,28 +24,30 @@ export class TourService {
 
 
   updateTourById(tourID: string, updatedTour: Tour): Observable<any> {
+    console.log(updatedTour);
+    console.log(tourID);
+    
+    
     return this.http.put(`http://localhost:4500/tours/update/${tourID}`, updatedTour);
   }
   
 
-  // updateUserById(updatedTour:Tour): Observable<any> {
-  //   return this.authService.getUserDetails().pipe(
-  //     switchMap((user) => {
-  //       console.log(user.userID);
-  //       let userID=user.userID
-        
-  
-  //       const url = `http://localhost:4500/users/updateUser/${userID}`;
-  
-  //       const headers = new HttpHeaders({
-  //         'Content-Type': 'application/json',
-  //         'token': token,
-  //       });
-  
-  //       return this.http.put(url, updatedUser, { headers });
-  //     })
-  //   );
+  getSingleTour(tourID:string){
+
+    console.log(tourID);
+    
+    return this.http.get(`http://localhost:4500/tours/single/${tourID}`)
+  }
+
+  // updateUserById(tourID:string,updatedTour:Tour): Observable<any> {
+
+  //       const url = `http://localhost:4500/tours/update/${tourID}`;
+
+  //       return this.http.put(url, tourID);
+
   // }
+
+
 
   deleteTour(tourID: string): Observable<any> {
     return this.http.delete(`http://localhost:4500/tours/${tourID}`)

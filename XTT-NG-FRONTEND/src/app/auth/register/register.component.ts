@@ -12,6 +12,7 @@ export class RegisterComponent {
   registrationForm!: FormGroup
 
   constructor(private authService:AuthService,private formbuilder:FormBuilder,private router:Router){
+    
     this.registrationForm=this.formbuilder.group({
       fullName:['',[Validators.required]],
       email:['',[Validators.required]],
@@ -26,6 +27,7 @@ export class RegisterComponent {
       control?.hasError('email') ? 'Not a valid email' :
         '';
   }
+  
   registerUser(){
     if (this.registrationForm.valid) {
       let registeredUser = this.registrationForm.value;

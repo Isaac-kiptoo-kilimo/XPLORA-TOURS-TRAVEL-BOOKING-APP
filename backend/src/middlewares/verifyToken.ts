@@ -28,7 +28,7 @@ export const verifyToken = (req:ExtendedUser, res:Response, next:NextFunction) =
         
         
     } catch (error) {
-        console.error('Token verification failed. Error:', error);
+        // console.error('Token verification failed. Error:', error);
         return res.json({
             
             message: error

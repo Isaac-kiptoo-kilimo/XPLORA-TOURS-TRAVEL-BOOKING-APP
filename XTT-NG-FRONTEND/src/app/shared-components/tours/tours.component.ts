@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Tour } from 'src/app/interfaces/tour';
 import { User } from 'src/app/interfaces/user';
 import { TourService } from 'src/app/services/tour.service';
@@ -18,13 +18,20 @@ export class ToursComponent {
 
   tours!: Tour[];
   users!: User[];
+  tour !: Tour
+  tourID: string=''
+
+  updateTourID :string =''
+
+  // tour!:any
+ 
   // visible = true
 
   updateTourForm!: FormGroup
  
  
 
-  constructor(private tourService: TourService, private router: Router, private userService:UsersService,private cdr: ChangeDetectorRef , private formBuilder:FormBuilder ){
+  constructor(private tourService: TourService, private router: Router, private userService:UsersService,private cdr: ChangeDetectorRef , private formBuilder:FormBuilder, private route:ActivatedRoute ){
     this.updateTourForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
@@ -37,28 +44,65 @@ export class ToursComponent {
 
   }
  
-  // updateTour(){
-  //   let updatedTour: Tour = this.updateTourForm.value;
-  //   // updatedUser.userID = this.userID
-  //      console.log(updatedUser);
-       
-  //      this.tourService.updateTourById(tourID, updatedTour)subscribe(
-  //     (response) => {
-  //       console.log(response);
-        
-  //       console.log('Tour updated successfully', response);
-  //       this.updateTourForm.reset();
-  //       // this.isFormVisible = false;
-  //     },
-  //     (error) => {
-  //       console.error('Error updating user', error);
-  //     }
-  //   );
-  // }
+ getTour(){
 
+    this.route.params.subscribe(params=>{
+      this.tourID = params['tourID']
+
+      this.tourService.getSingleTour(this.tourID).subscribe(
+        (tour: any) => {
+          console.log(tour);
+          this.tour = tour;
+        },
+        (error) => {
+          console.error('Error fetching tour details:', error);
+        }
+      );
+    })
+
+
+  }
+
+  clickUpdateTourID = (tourID:string)=> {
+    this.updateTourID = tourID
+
+    console.log(this.updateTourID);
+    
+  }
+
+  updateTour() {
+    if (this.updateTourForm.invalid) {
+    
+      return;
+    }
+  
+    if (!this.tour || !this.updateTourID) {
+      
+      console.error('Invalid tour or tourID');
+      return;
+    }
+  
+    let updatedTour: Tour = this.updateTourForm.value;
+     this.tourID= this.updateTourID;
+  
+    console.log(updatedTour);
+  
+    this.tourService.updateTourById(this.tourID, updatedTour).subscribe(
+      (response) => {
+        console.log('Tour updated successfully', response);
+        this.updateTourForm.reset();
+      },
+      (error) => {
+        console.error('Error updating tour', error);
+      }
+    );
+  }
+  
   ngOnInit() {
     this.getTours();
     this.getUsers();
+    this.getTour()
+    // this.getTourDetails()
     
   }
 
@@ -66,7 +110,7 @@ export class ToursComponent {
   getTours() {
     this.tourService.getTours().subscribe(
       (response) => {
-        this.tours = response;
+        this.tours= response;
         this.cdr.detectChanges()
         this.loadTours
       },
@@ -75,6 +119,8 @@ export class ToursComponent {
       }
     );
   }
+
+
 
 
   getUsers() {

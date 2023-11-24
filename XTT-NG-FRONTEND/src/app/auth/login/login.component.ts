@@ -53,16 +53,18 @@ getErrorMessage(controlName: string) {
   
     this.authService.login(data).subscribe(
       (result) => {
-      
+
         const token = result.token;
         localStorage.setItem('token', token);
   
         console.log('Login successful. Token:', token); 
-  
+
+       
+        
         this.userService.checkDetails().subscribe(
+          
           (role) => {
             console.log('User role:', role); 
-  
             this.loggedInState = true;
             this.successMessage = 'Logged in successfully.';
             setTimeout(() => {
@@ -86,7 +88,7 @@ getErrorMessage(controlName: string) {
         if (error.status === 401) {
           this.errorMessage = 'Invalid email or password.';
         } else {
-          this.errorMessage = 'An unexpected error occurred.';
+          this.errorMessage = error.error.error;
         }
         setTimeout(() => {
           this.errorMessage = '';

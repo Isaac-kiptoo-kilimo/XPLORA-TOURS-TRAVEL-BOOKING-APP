@@ -14,8 +14,7 @@ export interface Tour{
     price: number;
     type:string,
     startDate:string,
-    endDate:string,
-    duration:string
+    endDate:string
 }
 
 export interface TourBooking {
